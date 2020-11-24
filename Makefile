@@ -6,7 +6,7 @@
 #    By: krambono <krambono@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/24 11:51:46 by krambono          #+#    #+#              #
-#    Updated: 2020/11/24 18:03:17 by krambono         ###   ########lyon.fr    #
+#    Updated: 2020/11/24 18:06:01 by krambono         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,15 +49,15 @@ GREEN = \033[32m
 BLUE = \033[36m
 DEFAULT = \033[0m
 
-.PHONY: clean fclean ffclean re clean-glfw clean-glad clean-libft clean-mgl clean-libs
+.PHONY: clean fclean ffclean re clean-glfw clean-glad clean-libft clean-mgl clean-libs $(MGL_DIR)/libmgl.so
 
 # REGLES
-all: $(NAME)
+all: $(MGL_DIR)/libmgl.so $(NAME)
 
 $(OBJS_MAIN_DIR):
 	@mkdir -p $@
 
-$(NAME): $(GLFW_DIR) $(GLAD_DIR) $(GLAD_DIR)/src/glad.o $(FT_DIR)/libft.so $(MGL_DIR)/libmgl.so $(OBJS_MAIN_DIR) $(OBJS)
+$(NAME): $(GLFW_DIR) $(GLAD_DIR) $(GLAD_DIR)/src/glad.o $(FT_DIR)/libft.so $(OBJS_MAIN_DIR) $(OBJS)
 	@printf "\033[2K\r$(BLUE)>>Linking...$(DEFAULT)"
 	@$(CC)	-o $@ $(OBJS)\
 			$(GLAD_DIR)/src/glad.o\
