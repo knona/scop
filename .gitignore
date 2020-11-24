@@ -20,6 +20,7 @@
 
 # others
 *.DS_Store
+.vscode
 .cache
 .tmp
 scop
