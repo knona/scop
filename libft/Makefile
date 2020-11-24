@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: krambono <krambono@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: krambono <krambono@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/09 13:02:16 by krambono          #+#    #+#              #
-#    Updated: 2020/11/24 11:40:15 by krambono         ###   ########lyon.fr    #
+#    Updated: 2020/11/24 12:32:47 by krambono         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,13 +41,13 @@ OTHER 			= $(addprefix $(OTHER_DIR), $(OTHER_FILES))
 
 # TOUTES LES SOURCES
 SRCS_FILES 		= $(FT_PRINTF) $(GNL) $(MEM) $(STRING) $(OTHER)
-SRCS_MAIN_DIR 	= srcs/
+SRCS_MAIN_DIR 	= src/
 SRCS_DIRS 		= $(FT_PRINTF_DIR) $(GNL_DIR) $(MEM_DIR) $(STRING_DIR) $(OTHER_DIR)
 SRCS 			= $(addprefix $(SRCS_MAIN_DIR), $(SRCS_FILES))
 
 # HEADERS
 HEADERS_FILES 	= libft.h ft_printf.h
-HEADERS_DIR 	= ./includes/
+HEADERS_DIR 	= ./include/
 HEADERS 		= $(addprefix $(HEADERS_DIR), $(HEADERS_FILES))
 
 # OBJETS
@@ -58,7 +58,7 @@ OBJS_FILES 		= $(SRCS_FILES:.c=.o)
 OBJS 			= $(addprefix $(OBJS_MAIN_DIR), $(OBJS_FILES))
 
 # COMPILATEUR
-CC 				= gcc
+CC 				= clang
 CFLAGS			= -Wall -Wextra -Werror
 
 # TEXT
