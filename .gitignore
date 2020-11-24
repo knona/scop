@@ -19,6 +19,7 @@
 *.dSYM/
 
 # others
+*.DS_Store
 .cache
 .tmp
 scop
