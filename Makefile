@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: krambono <krambono@student.42.fr>          +#+  +:+       +#+         #
+#    By: krambono <krambono@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/24 11:51:46 by krambono          #+#    #+#              #
-#    Updated: 2020/11/24 13:03:15 by krambono         ###   ########.fr        #
+#    Updated: 2020/11/24 17:20:26 by krambono         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,7 @@ all: $(NAME)
 $(OBJS_MAIN_DIR):
 	@mkdir -p $@
 
-$(NAME): $(GLFW_DIR) $(GLAD_DIR) $(GLAD_DIR)/src/glad.o $(FT_DIR)/libft.a $(OBJS_MAIN_DIR) $(OBJS)
+$(NAME): $(GLFW_DIR) $(GLAD_DIR) $(GLAD_DIR)/src/glad.o $(FT_DIR)/libft.so $(OBJS_MAIN_DIR) $(OBJS)
 	@printf "\033[2K\r$(BLUE)>>Linking...$(DEFAULT)"
 	@$(CC) -o $@ $(OBJS) $(GLAD_DIR)/src/glad.o -L$(GLFW_DIR)/lib -lglfw3 -L$(FT_DIR) -lft -lGL -lX11 -lpthread -lXrandr -lXi -ldl
 	@printf "\033[2K\r$(NAME) has been created $(GREEN)[OK]$(DEFAULT)\n"
@@ -77,7 +77,7 @@ $(GLAD_DIR):
 	@echo "$(BLUE)Installing glad...$(DEFAULT)"
 	@./scripts/install-glad.bash
 
-$(FT_DIR)/libft.a:
+$(FT_DIR)/libft.so:
 	@make -sC $(FT_DIR)
 
 clean:
