@@ -54,3 +54,4 @@ dkms.conf
 .cache
 .tmp
 scop
+libs/
