@@ -12,10 +12,8 @@ function clean_before_exit {
 trap clean_before_exit EXIT
 
 current_directory=$(pwd)
-include=libs/glfw/include
-lib=libs/glfw/lib
-mkdir -p $include
-mkdir -p $lib
+glad_dir=$current_directory/libs/glfw
+mkdir -p $glad_dir
 
 cache=$(pwd)/.cache
 
@@ -35,13 +33,13 @@ cd .tmp
 unzip -qq $glfw_archive
 
 cd glfw-3.3.2
-cmake .
-make
 
-mv src/libglfw3.a $current_directory/$lib
-mv include/* $current_directory/$include
+mkdir build
+cd build
+cmake -DCMAKE_INSTALL_PREFIX=$glad_dir -DGLFW_BUILD_DOCS=no -DGLFW_BUILD_EXAMPLES=no -DGLFW_BUILD_TESTS=no -DBUILD_SHARED_LIBS=yes ..
+make install
 
-cd ../..
+cd ../../..
 rm -rf .tmp
 
 trap - EXIT

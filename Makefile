@@ -6,7 +6,7 @@
 #    By: krambono <krambono@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/24 11:51:46 by krambono          #+#    #+#              #
-#    Updated: 2020/11/24 18:06:01 by krambono         ###   ########lyon.fr    #
+#    Updated: 2020/11/24 18:25:19 by krambono         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,19 +49,19 @@ GREEN = \033[32m
 BLUE = \033[36m
 DEFAULT = \033[0m
 
-.PHONY: clean fclean ffclean re clean-glfw clean-glad clean-libft clean-mgl clean-libs $(MGL_DIR)/libmgl.so
+.PHONY: clean fclean ffclean re clean-glfw clean-glad clean-libft clean-mgl clean-libs $(FT_DIR)/libft.so $(MGL_DIR)/libmgl.so
 
 # REGLES
-all: $(MGL_DIR)/libmgl.so $(NAME)
+all: $(MGL_DIR)/libmgl.so $(FT_DIR)/libft.so $(NAME)
 
 $(OBJS_MAIN_DIR):
 	@mkdir -p $@
 
-$(NAME): $(GLFW_DIR) $(GLAD_DIR) $(GLAD_DIR)/src/glad.o $(FT_DIR)/libft.so $(OBJS_MAIN_DIR) $(OBJS)
+$(NAME): $(GLFW_DIR) $(GLAD_DIR) $(GLAD_DIR)/src/glad.o $(OBJS_MAIN_DIR) $(OBJS)
 	@printf "\033[2K\r$(BLUE)>>Linking...$(DEFAULT)"
 	@$(CC)	-o $@ $(OBJS)\
 			$(GLAD_DIR)/src/glad.o\
-			-L$(GLFW_DIR)/lib -lglfw3\
+			-L$(GLFW_DIR)/lib -lglfw\
 			-L$(FT_DIR) -lft\
 			-L$(MGL_DIR) -lmgl\
 			-lGL -lX11 -lpthread -lXrandr -lXi -ldl
