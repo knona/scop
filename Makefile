@@ -6,7 +6,7 @@
 #    By: krambono <krambono@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/24 11:51:46 by krambono          #+#    #+#              #
-#    Updated: 2020/11/24 18:53:48 by krambono         ###   ########lyon.fr    #
+#    Updated: 2020/11/24 20:40:40 by krambono         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,7 @@ DEFAULT = \033[0m
 .PHONY: clean fclean ffclean re clean-glfw clean-glad clean-libft clean-mgl clean-libs $(FT_DIR)/libft.so $(MGL_DIR)/libmgl.so
 
 # REGLES
-all: $(FT_DIR)/libft.so $(MGL_DIR)/libmgl.so $(NAME)
+all: $(FT_DIR)/libft.so $(NAME)
 
 $(OBJS_MAIN_DIR):
 	@mkdir -p $@
@@ -67,7 +67,7 @@ $(NAME): $(GLFW_DIR) $(GLAD_DIR) $(GLAD_DIR)/src/glad.o $(OBJS_MAIN_DIR) $(OBJS)
 			-lGL -lX11 -lpthread -lXrandr -lXi -ldl
 	@printf "\033[2K\r$(NAME) has been created $(GREEN)[OK]$(DEFAULT)\n"
 
-$(OBJS_MAIN_DIR)%.o: $(SRCS_MAIN_DIR)%.c $(HEADERS)
+$(OBJS_MAIN_DIR)%.o: $(SRCS_MAIN_DIR)%.c $(MGL_DIR)/libmgl.so $(HEADERS)
 	@printf "\033[2K\r$(BLUE)>>Compiling $<$(BLUE) $(DEFAULT)"
 	@$(CC) $(CFLAGS)\
 		-I $(GLFW_DIR)/include\
