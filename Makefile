@@ -6,7 +6,7 @@
 #    By: krambono <krambono@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/24 11:51:46 by krambono          #+#    #+#              #
-#    Updated: 2020/11/24 18:25:19 by krambono         ###   ########lyon.fr    #
+#    Updated: 2020/11/24 18:53:48 by krambono         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,7 @@ DEFAULT = \033[0m
 .PHONY: clean fclean ffclean re clean-glfw clean-glad clean-libft clean-mgl clean-libs $(FT_DIR)/libft.so $(MGL_DIR)/libmgl.so
 
 # REGLES
-all: $(MGL_DIR)/libmgl.so $(FT_DIR)/libft.so $(NAME)
+all: $(FT_DIR)/libft.so $(MGL_DIR)/libmgl.so $(NAME)
 
 $(OBJS_MAIN_DIR):
 	@mkdir -p $@
