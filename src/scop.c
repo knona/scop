@@ -2,6 +2,6 @@
 
 int main(void)
 {
-	ft_printf("YOO, HOW ARE YOU?\n");
+	test();
 	return 0;
 }

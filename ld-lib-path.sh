@@ -1,2 +1,3 @@
 #!/bin/bash
-export LD_LIBRARY_PATH=$(pwd)/libft:LD_LIBRARY_PATH
+dir=$(pwd)
+export LD_LIBRARY_PATH=$dir/libft:$dir/mgl:$LD_LIBRARY_PATH

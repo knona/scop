@@ -6,7 +6,7 @@
 #    By: krambono <krambono@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/24 11:51:46 by krambono          #+#    #+#              #
-#    Updated: 2020/11/24 17:20:26 by krambono         ###   ########lyon.fr    #
+#    Updated: 2020/11/24 18:03:17 by krambono         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ HEADERS					= $(addprefix $(HEADERS_MAIN_DIR), $(HEADERS_FILES))
 GLFW_DIR = libs/glfw
 GLAD_DIR = libs/glad
 FT_DIR = libft
+MGL_DIR = mgl
 
 # COMPILATEUR
 CC		= clang
@@ -48,7 +49,7 @@ GREEN = \033[32m
 BLUE = \033[36m
 DEFAULT = \033[0m
 
-.PHONY: clean fclean re clean-glfw clean-glad clean-libs clean-libft ffclean
+.PHONY: clean fclean ffclean re clean-glfw clean-glad clean-libft clean-mgl clean-libs
 
 # REGLES
 all: $(NAME)
@@ -56,14 +57,25 @@ all: $(NAME)
 $(OBJS_MAIN_DIR):
 	@mkdir -p $@
 
-$(NAME): $(GLFW_DIR) $(GLAD_DIR) $(GLAD_DIR)/src/glad.o $(FT_DIR)/libft.so $(OBJS_MAIN_DIR) $(OBJS)
+$(NAME): $(GLFW_DIR) $(GLAD_DIR) $(GLAD_DIR)/src/glad.o $(FT_DIR)/libft.so $(MGL_DIR)/libmgl.so $(OBJS_MAIN_DIR) $(OBJS)
 	@printf "\033[2K\r$(BLUE)>>Linking...$(DEFAULT)"
-	@$(CC) -o $@ $(OBJS) $(GLAD_DIR)/src/glad.o -L$(GLFW_DIR)/lib -lglfw3 -L$(FT_DIR) -lft -lGL -lX11 -lpthread -lXrandr -lXi -ldl
+	@$(CC)	-o $@ $(OBJS)\
+			$(GLAD_DIR)/src/glad.o\
+			-L$(GLFW_DIR)/lib -lglfw3\
+			-L$(FT_DIR) -lft\
+			-L$(MGL_DIR) -lmgl\
+			-lGL -lX11 -lpthread -lXrandr -lXi -ldl
 	@printf "\033[2K\r$(NAME) has been created $(GREEN)[OK]$(DEFAULT)\n"
 
 $(OBJS_MAIN_DIR)%.o: $(SRCS_MAIN_DIR)%.c $(HEADERS)
 	@printf "\033[2K\r$(BLUE)>>Compiling $<$(BLUE) $(DEFAULT)"
-	@$(CC) $(CFLAGS) -I $(GLFW_DIR)/include -I $(GLAD_DIR)/include -I $(FT_DIR)/include -I $(HEADERS_MAIN_DIR) -o $@ -c $<
+	@$(CC) $(CFLAGS)\
+		-I $(GLFW_DIR)/include\
+		-I $(GLAD_DIR)/include\
+		-I $(FT_DIR)/include\
+		-I $(MGL_DIR)/include\
+		-I $(HEADERS_MAIN_DIR)\
+		-o $@ -c $<
 
 $(GLAD_DIR)/src/glad.o: $(GLAD_DIR)/src/glad.c
 	@printf "\033[2K\r$(BLUE)>>Compiling $<$(BLUE) $(DEFAULT)"
@@ -80,12 +92,15 @@ $(GLAD_DIR):
 $(FT_DIR)/libft.so:
 	@make -sC $(FT_DIR)
 
+$(MGL_DIR)/libmgl.so:
+	@make -sC $(MGL_DIR)
+
 clean:
-	@echo "$(YELLOW)$(NAME):\t$(RED)rm $(YELLOW)objects\t $(GREEN)[OK]$(DEFAULT)"
+	@echo "$(YELLOW)$(NAME):\t$(RED)rm $(YELLOW)objects\t  $(GREEN)[OK]$(DEFAULT)"
 	@rm -rf $(OBJS_MAIN_DIR)
 
 fclean:	clean
-	@echo "$(YELLOW)$(NAME):\t$(RED)rm $(YELLOW)binaries\t $(GREEN)[OK]$(DEFAULT)"
+	@echo "$(YELLOW)$(NAME):\t$(RED)rm $(YELLOW)binaries\t  $(GREEN)[OK]$(DEFAULT)"
 	@rm -f $(NAME)
 
 clean-glfw:
@@ -100,7 +115,11 @@ clean-libft:
 	@echo "$(RED)Removing libft...$(DEFAULT)"
 	@make -sC $(FT_DIR) fclean
 
-clean-libs: clean-glfw clean-glad clean-libft
+clean-mgl:
+	@echo "$(RED)Removing mgl...$(DEFAULT)"
+	@make -sC $(MGL_DIR) fclean
+
+clean-libs: clean-glfw clean-glad clean-libft clean-mgl
 	@rm -rf libs
 
 ffclean: clean-libs fclean
