@@ -6,7 +6,7 @@
 #    By: krambono <krambono@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/24 11:51:46 by krambono          #+#    #+#              #
-#    Updated: 2020/11/24 12:57:49 by krambono         ###   ########.fr        #
+#    Updated: 2020/11/24 13:03:15 by krambono         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -101,6 +101,7 @@ clean-libft:
 	@make -sC $(FT_DIR) fclean
 
 clean-libs: clean-glfw clean-glad clean-libft
+	@rm -rf libs
 
 ffclean: clean-libs fclean
 
