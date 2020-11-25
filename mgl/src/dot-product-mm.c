@@ -17,9 +17,9 @@ void dotmm(const void *mat1, const void *mat2, void *out, int size)
 			k = 0;
 			while (k < size)
 			{
-				v1 = ((float *)mat1)[i * size + k];
-				v2 = ((float *)mat2)[k * size + j];
-				((float *)out)[i * size + j] += v1 * v2;
+				v1 = ((float *)mat1)[j * size + k];
+				v2 = ((float *)mat2)[k * size + i];
+				((float *)out)[j * size + i] += v1 * v2;
 				k++;
 			}
 			j++;

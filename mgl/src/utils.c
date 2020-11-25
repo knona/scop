@@ -1,11 +1,11 @@
 #include "mgl.h"
 
-float mat_at(void *mat, int i, int j, int size)
+float mat_at(void *mat, int x, int y, int size)
 {
-	return ((float *)mat)[i * size + j];
+	return (((float *)mat)[x * size + y]);
 }
 
-float *mat_at_addr(void *mat, int i, int j, int size)
+float *mat_at_addr(void *mat, int x, int y, int size)
 {
-	return ((float *)mat) + i * size + j;
+	return (((float *)mat) + x * size + y);
 }
