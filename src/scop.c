@@ -1,32 +1,42 @@
 #include "scop.h"
 
-void ft1(void)
+GLFWwindow *window;
+GLuint      EBO;
+GLuint      VAO;
+GLuint      VBO;
+
+int init()
 {
-	t_mat4x4 model = g_matI4;
+	if (!glfwInit())
+		return (error_int(0, "Failed to initialize GLFW"));
 
-	t_vec3 transVec = { 1, 2, 3 };
-	model = translate(&model, &transVec);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	t_vec3 scaleVec = { 2, 2, 2 };
-	model = scale(&model, &scaleVec);
+	window = glfwCreateWindow(1280, 720, "LearnOpenGL", NULL, NULL);
+	if (!window)
+		return (error_int(0, "Failed to create GLFW window"));
 
-	print_mat(&model, 4);
-	// printf("%d\n", (int)mat_at(&model, 3, 1, 4));
-}
+	glfwMakeContextCurrent(window);
 
-void ft2(void)
-{
-	t_mat3x3 mat = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+		return (error_int(0, "Failed to initialize GLAD"));
 
-	t_mat3x3 res = dotmm3x3(&mat, &mat);
-	print_mat(&res, 3);
+	glViewport(0, 0, 1280, 720);
+	// glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+	return 1;
 }
 
 int main(void)
 {
 	setbuf(stdout, NULL);
+	if (!init())
+		return 1;
 
-	ft1();
-	// ft2();
-	return 0;
+	GLuint shader;
+
+	if (!createShader(&shader, GL_VERTEX_SHADER, "shaders/shader.vert"))
+		return (1);
+	return (0);
 }

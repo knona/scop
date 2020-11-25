@@ -6,7 +6,7 @@
 #    By: krambono <krambono@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/09 13:02:16 by krambono          #+#    #+#              #
-#    Updated: 2020/11/24 17:55:47 by krambono         ###   ########lyon.fr    #
+#    Updated: 2020/11/25 19:45:08 by krambono         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ FT_DIR = ../libft
 
 # COMPILATEUR
 CC 				= clang
-CFLAGS			= -Wall -Wextra -Werror -fPIC
+CFLAGS			= -Wall -Wextra -Werror -fPIC -g3
 
 # TEXT
 RED = \033[31m
