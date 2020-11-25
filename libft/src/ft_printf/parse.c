@@ -64,6 +64,7 @@ void	read_precision(const char *format, t_params *params, int *i, va_list ap)
 {
 	int temp;
 
+	(*i)++;
 	if (format[*i] == '*')
 	{
 		params->precision = va_arg(ap, int);
@@ -110,8 +111,8 @@ int		parse_format(const char *format, t_params *params, int *index,
 	i = 0;
 	read_flags(format, params, &i);
 	read_width(format, params, &i, ap);
-	format[i] == '.' ? i++ : 0;
-	format[i] == '.' ? read_precision(format, params, &i, ap) : 0;
+	if (format[i] == '.')
+		read_precision(format, params, &i, ap);
 	read_length(format, params, &i);
 	is_valid = 0;
 	if (is_specifier(format[i]))
