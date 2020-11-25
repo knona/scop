@@ -113,10 +113,12 @@ t_mat3x3 transpose3x3(const void *mat);
 t_mat4x4 transpose4x4(const void *mat);
 
 /*
-** UTILS
+** MAT ACCESS
 */
-float  mat_at(void *mat, int i, int j, int size);
-float *mat_at_addr(void *mat, int i, int j, int size);
+float mat_at(void *mat, int i, int j, int size);
+void  mat2x2set(t_mat2x2 *mat, int x, int y, float value);
+void  mat3x3set(t_mat3x3 *mat, int x, int y, float value);
+void  mat4x4set(t_mat4x4 *mat, int x, int y, float value);
 
 /*
 ** PRINT
