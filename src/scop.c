@@ -1,18 +1,23 @@
 #include "scop.h"
 
+void mylib(void)
+{
+	t_mat4x4 model = g_matI4;
+
+	t_vec3 transVec = { 2, 1, 4 };
+	model = translate(&model, &transVec);
+
+	t_vec3 scaleVec = { 2, 2, 1 };
+	model = scale(&model, &scaleVec);
+
+	// model = transpose4x4(&model);
+	print_mat(&model, 4);
+}
+
 int main(void)
 {
 	setbuf(stdout, NULL);
-	t_mat3x3 matrix = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
-	t_vec3   vec = { 1, 2, 3 };
-	t_vec3   vecResult;
 
-	print_mat(matrix, 3);
-	print_vec(&vec, 3);
-
-	dotmv(matrix, &vec, &vecResult, 3);
-
-	print_vec(&vecResult, 3);
-
+	mylib();
 	return 0;
 }
