@@ -8,7 +8,7 @@ GLuint      VBO;
 int init()
 {
 	if (!glfwInit())
-		return (error_int(0, "Failed to initialize GLFW"));
+		return (error_0("Failed to initialize GLFW"));
 
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -16,12 +16,12 @@ int init()
 
 	window = glfwCreateWindow(1280, 720, "LearnOpenGL", NULL, NULL);
 	if (!window)
-		return (error_int(0, "Failed to create GLFW window"));
+		return (error_0("Failed to create GLFW window"));
 
 	glfwMakeContextCurrent(window);
 
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-		return (error_int(0, "Failed to initialize GLAD"));
+		return (error_0("Failed to initialize GLAD"));
 
 	glViewport(0, 0, 1280, 720);
 	// glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
@@ -34,9 +34,10 @@ int main(void)
 	if (!init())
 		return 1;
 
-	GLuint shader;
+	GLuint program;
 
-	if (!createShader(&shader, GL_VERTEX_SHADER, "shaders/shader.vert"))
+	if (!create_program(&program, "shaders/shader.vert", "shaders/shader.frag"))
 		return (1);
+
 	return (0);
 }

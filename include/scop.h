@@ -17,13 +17,18 @@
 /*
 ** UTILS
 */
-int   error_int(int ret, char *error);
-char *error_null(char *error);
+int   error_int(int ret, const char *error);
+int   error_0(const char *error);
+char *error_null(const char *error);
 
 /*
 ** SHADER
 */
 int createShader(GLuint *shader, const GLenum shaderType, const char *shaderPath);
-char *getShaderCode(const char *shaderPath, int *outLength);
+
+/*
+** PROGRAM
+*/
+int create_program(GLuint *program, const char *vertex_shader_path, const char *fragment_shader_path);
 
 #endif // !SCOP_H

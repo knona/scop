@@ -46,8 +46,8 @@ int createShader(GLuint *shader, const GLenum shaderType, const char *shaderPath
 	int length;
 
 	*shader = glCreateShader(shaderType);
-	if (!shader)
-		return (error_int(0, "Failed to create shader"));
+	if (!*shader)
+		return (error_0("Failed to create shader"));
 	const char *shaderCode = getShaderCode(shaderPath, &length);
 	if (!shaderCode)
 		return (0);
