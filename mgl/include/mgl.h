@@ -7,45 +7,45 @@
 
 struct s_mat2x2
 {
-	float x1;
-	float y1;
-	float x2;
-	float y2;
+	float m00;
+	float m01;
+	float m10;
+	float m11;
 };
 typedef struct s_mat2x2 t_mat2x2;
 
 struct s_mat3x3
 {
-	float x1;
-	float y1;
-	float z1;
-	float x2;
-	float y2;
-	float z2;
-	float x3;
-	float y3;
-	float z3;
+	float m00;
+	float m01;
+	float m02;
+	float m10;
+	float m11;
+	float m12;
+	float m20;
+	float m21;
+	float m22;
 };
 typedef struct s_mat3x3 t_mat3x3;
 
 struct s_mat4x4
 {
-	float x1;
-	float y1;
-	float z1;
-	float w1;
-	float x2;
-	float y2;
-	float z2;
-	float w2;
-	float x3;
-	float y3;
-	float z3;
-	float w3;
-	float x4;
-	float y4;
-	float z4;
-	float w4;
+	float m00;
+	float m01;
+	float m02;
+	float m03;
+	float m10;
+	float m11;
+	float m12;
+	float m13;
+	float m20;
+	float m21;
+	float m22;
+	float m23;
+	float m30;
+	float m31;
+	float m32;
+	float m33;
 };
 typedef struct s_mat4x4 t_mat4x4;
 
@@ -115,17 +115,23 @@ t_mat4x4 perspective2(float fovy, float aspect, float near, float far);
 ** TRANSPOSE
 */
 void     transpose(const void *mat, void *out, int size);
-t_mat2x2 transpose2x2(const void *mat);
-t_mat3x3 transpose3x3(const void *mat);
-t_mat4x4 transpose4x4(const void *mat);
+t_mat2x2 transpose2x2(const t_mat2x2 *mat);
+t_mat3x3 transpose3x3(const t_mat3x3 *mat);
+t_mat4x4 transpose4x4(const t_mat4x4 *mat);
 
 /*
-** MAT ACCESS
+** MAT AT
 */
-float mat_at(void *mat, int i, int j, int size);
-void  mat2x2set(t_mat2x2 *mat, int x, int y, float value);
-void  mat3x3set(t_mat3x3 *mat, int x, int y, float value);
-void  mat4x4set(t_mat4x4 *mat, int x, int y, float value);
+float mat2x2at(const t_mat2x2 *mat, int x, int y);
+float mat3x3at(const t_mat3x3 *mat, int x, int y);
+float mat4x4at(const t_mat4x4 *mat, int x, int y);
+
+/*
+** MAT SET
+*/
+void mat2x2set(t_mat2x2 *mat, int x, int y, float value);
+void mat3x3set(t_mat3x3 *mat, int x, int y, float value);
+void mat4x4set(t_mat4x4 *mat, int x, int y, float value);
 
 /*
 ** PRINT

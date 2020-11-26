@@ -5,9 +5,9 @@ t_mat4x4 translate(const t_mat4x4 *mat, const t_vec3 *vec)
 	t_mat4x4 transf;
 
 	transf = g_matI4;
-	transf.x4 = vec->x;
-	transf.y4 = vec->y;
-	transf.z4 = vec->z;
+	transf.m30 = vec->x;
+	transf.m31 = vec->y;
+	transf.m32 = vec->z;
 	return (dotmm4x4(&transf, mat));
 }
 
@@ -16,9 +16,9 @@ t_mat4x4 scale(const t_mat4x4 *mat, const t_vec3 *vec)
 	t_mat4x4 transf;
 
 	transf = g_matI4;
-	transf.x1 = vec->x;
-	transf.y2 = vec->y;
-	transf.z3 = vec->z;
+	transf.m00 = vec->x;
+	transf.m11 = vec->y;
+	transf.m22 = vec->z;
 	return (dotmm4x4(&transf, mat));
 }
 
@@ -27,10 +27,10 @@ t_mat4x4 rotx(const t_mat4x4 *mat, float angle)
 	t_mat4x4 transf = g_matI4;
 
 	transf = g_matI4;
-	transf.y2 = cosf(angle);
-	transf.z2 = -sinf(angle);
-	transf.y3 = sinf(angle);
-	transf.z3 = cosf(angle);
+	transf.m11 = cosf(angle);
+	transf.m12 = -sinf(angle);
+	transf.m21 = sinf(angle);
+	transf.m22 = cosf(angle);
 	return (dotmm4x4(&transf, mat));
 }
 
@@ -39,10 +39,10 @@ t_mat4x4 roty(const t_mat4x4 *mat, float angle)
 	t_mat4x4 transf = g_matI4;
 
 	transf = g_matI4;
-	transf.x1 = cosf(angle);
-	transf.x3 = sinf(angle);
-	transf.z1 = -sinf(angle);
-	transf.z3 = cosf(angle);
+	transf.m00 = cosf(angle);
+	transf.m20 = sinf(angle);
+	transf.m02 = -sinf(angle);
+	transf.m22 = cosf(angle);
 	return (dotmm4x4(&transf, mat));
 }
 
@@ -51,9 +51,9 @@ t_mat4x4 rotz(const t_mat4x4 *mat, float angle)
 	t_mat4x4 transf = g_matI4;
 
 	transf = g_matI4;
-	transf.x1 = cosf(angle);
-	transf.x2 = -sinf(angle);
-	transf.y1 = sinf(angle);
-	transf.y2 = cosf(angle);
+	transf.m00 = cosf(angle);
+	transf.m10 = -sinf(angle);
+	transf.m01 = sinf(angle);
+	transf.m11 = cosf(angle);
 	return (dotmm4x4(&transf, mat));
 }

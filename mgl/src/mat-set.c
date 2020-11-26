@@ -1,10 +1,5 @@
 #include "mgl.h"
 
-float mat_at(void *mat, int x, int y, int size)
-{
-	return (((float *)mat)[x * size + y]);
-}
-
 void mat2x2set(t_mat2x2 *mat, int x, int y, float value)
 {
 	((float *)mat)[x * 2 + y] = value;
