@@ -12,7 +12,6 @@ struct s_mat2x2
 	float m10;
 	float m11;
 };
-typedef struct s_mat2x2 t_mat2x2;
 
 struct s_mat3x3
 {
@@ -26,7 +25,6 @@ struct s_mat3x3
 	float m21;
 	float m22;
 };
-typedef struct s_mat3x3 t_mat3x3;
 
 struct s_mat4x4
 {
@@ -47,14 +45,12 @@ struct s_mat4x4
 	float m32;
 	float m33;
 };
-typedef struct s_mat4x4 t_mat4x4;
 
 struct s_vec2
 {
 	float x;
 	float y;
 };
-typedef struct s_vec2 t_vec2;
 
 struct s_vec3
 {
@@ -62,7 +58,6 @@ struct s_vec3
 	float y;
 	float z;
 };
-typedef struct s_vec3 t_vec3;
 
 struct s_vec4
 {
@@ -71,7 +66,13 @@ struct s_vec4
 	float z;
 	float w;
 };
-typedef struct s_vec4 t_vec4;
+
+typedef struct s_mat2x2 t_mat2x2;
+typedef struct s_mat3x3 t_mat3x3;
+typedef struct s_mat4x4 t_mat4x4;
+typedef struct s_vec2   t_vec2;
+typedef struct s_vec3   t_vec3;
+typedef struct s_vec4   t_vec4;
 
 extern const t_mat2x2 g_matI2;
 extern const t_mat3x3 g_matI3;
