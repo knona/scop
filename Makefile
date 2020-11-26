@@ -6,7 +6,7 @@
 #    By: krambono <krambono@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/24 11:51:46 by krambono          #+#    #+#              #
-#    Updated: 2020/11/24 20:40:40 by krambono         ###   ########lyon.fr    #
+#    Updated: 2020/11/26 11:11:44 by krambono         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,20 +14,20 @@
 NAME = scop
 
 # SOURCES
-SRCS_FILES_WILDCARD	= $(wildcard src/*.c)
-SRCS_FILES			= $(SRCS_FILES_WILDCARD:src/%=%)
-SRCS_MAIN_DIR		= src/
+SRCS_FILES_WILDCARD	= $(wildcard main/src/*.c)
+SRCS_FILES			= $(SRCS_FILES_WILDCARD:main/src/%=%)
+SRCS_MAIN_DIR		= main/src/
 SRCS				= $(addprefix $(SRCS_MAIN_DIR), $(SRCS_FILES))
 
 # OBJETS
 OBJS_FILES		= $(SRCS_FILES:.c=.o)
-OBJS_MAIN_DIR 	= obj/
+OBJS_MAIN_DIR 	= main/obj/
 OBJS 			= $(addprefix $(OBJS_MAIN_DIR), $(OBJS_FILES))
 
 # HEADERS
-HEADERS_FILES_WILDCARD	= $(wildcard include/*.h)
-HEADERS_FILES 			= $(HEADERS_FILES_WILDCARD:include/%=%)
-HEADERS_MAIN_DIR		= include/
+HEADERS_FILES_WILDCARD	= $(wildcard main/include/*.h)
+HEADERS_FILES 			= $(HEADERS_FILES_WILDCARD:main/include/%=%)
+HEADERS_MAIN_DIR		= main/include/
 HEADERS					= $(addprefix $(HEADERS_MAIN_DIR), $(HEADERS_FILES))
 
 # LIBRARIES
