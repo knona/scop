@@ -115,6 +115,7 @@ int start(void)
 		return (0);
 	view = g_matI4;
 	projection = ortho(0, SCOP_WIN_WIDTH, 0, SCOP_WIN_HEIGHT);
+	glUseProgram(program);
 	if (!uniform_set_mat4x4(program, "view", &view))
 		return (0);
 	if (!uniform_set_mat4x4(program, "projection", &projection))
