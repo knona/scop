@@ -1,6 +1,7 @@
 #include "scop.h"
 
 GLFWwindow *window;
+GLuint      program;
 GLuint      ebo;
 GLuint      vao;
 GLuint      vbo;
@@ -28,16 +29,46 @@ int init()
 	return 1;
 }
 
+void create_vao()
+{
+	float cell[] = {
+		0.0f, 1.0f, // top left
+		0.0f, 0.0f, // bottom left
+		1.0f, 1.0f, // top right
+		1.0f, 0.0f, // bottom right
+	};
+
+	uint indices[] = {
+		0, 1, 2, // first triangle
+		1, 2, 3  // second triangle
+	};
+
+	glBindVertexArray(vao);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(cell), cell, GL_STATIC_DRAW);
+
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void *)0);
+	glEnableVertexAttribArray(0);
+
+	glBindVertexArray(0);
+}
+
+int start(void)
+{
+	if (!create_program(&program, "shaders/shader.vert", "shaders/shader.frag"))
+		return (0);
+	return (1);
+}
+
 int main(void)
 {
-	setbuf(stdout, NULL);
+	// setbuf(stdout, NULL);
 	if (!init())
-		return 1;
-
-	GLuint program;
-
-	if (!create_program(&program, "shaders/shader.vert", "shaders/shader.frag"))
 		return (1);
 
-	return (0);
+	return (!start());
 }

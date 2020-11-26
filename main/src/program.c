@@ -9,15 +9,14 @@ void delete_shaders(GLuint vertex_shader, GLuint fragment_shader)
 int check_program_link_success(GLuint program)
 {
 	int  success;
-	char buffer[500];
+	char buffer[SCOP_GL_ERROR_BUFFER];
 
-	ft_bzero(buffer, 500);
+	ft_bzero(buffer, SCOP_GL_ERROR_BUFFER);
 	glGetProgramiv(program, GL_LINK_STATUS, &success);
 	if (!success)
 	{
-		glGetProgramInfoLog(program, 500, NULL, buffer);
-		ft_dprintf(2, "Shader: Compilation failed: %s\n", buffer);
-		return (0);
+		glGetProgramInfoLog(program, SCOP_GL_ERROR_BUFFER, NULL, buffer);
+		return error_0("Failed to link program: %s", buffer);
 	}
 	return (1);
 }
