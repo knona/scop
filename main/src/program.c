@@ -27,11 +27,11 @@ int create_program(GLuint *program, const char *vertex_shader_path, const char *
 	GLuint fragment_shader;
 
 	if (!create_shader(&vertex_shader, GL_VERTEX_SHADER, vertex_shader_path))
-		return (1);
+		return (0);
 	if (!create_shader(&fragment_shader, GL_FRAGMENT_SHADER, fragment_shader_path))
 	{
 		glDeleteShader(vertex_shader);
-		return (1);
+		return (0);
 	}
 	if (!(*program = glCreateProgram()))
 	{

@@ -32,7 +32,6 @@ int check_compilation_success(GLuint shader)
 
 	ft_bzero(buffer, SCOP_GL_ERROR_BUFFER);
 	glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
-	success = 0;
 	if (!success)
 	{
 		glGetShaderInfoLog(shader, SCOP_GL_ERROR_BUFFER, NULL, buffer);

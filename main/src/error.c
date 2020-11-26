@@ -24,7 +24,7 @@ int error_0(const char *format, ...)
 	va_start(ap, format);
 	error(format, ap);
 	va_end(ap);
-	return error_int(0, format);
+	return 0;
 }
 
 char *error_null(const char *format, ...)
