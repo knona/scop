@@ -29,7 +29,7 @@ void print_mat(void *mat, int mat_size)
 		{
 			if (j != 0)
 				printf(" ");
-			printf("%6.2f", ((float *)mat)[j * mat_size + i]);
+			printf("%15f", ((float *)mat)[j * mat_size + i]);
 			j++;
 		}
 		printf("\n");

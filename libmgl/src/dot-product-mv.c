@@ -2,23 +2,23 @@
 
 void dotmv(const void *mat, const void *vec, void *out, int size)
 {
+	int   i;
 	int   j;
-	int   k;
 	float v1;
 	float v2;
 
-	j = 0;
-	while (j < size)
+	i = 0;
+	while (i < size)
 	{
-		k = 0;
-		while (k < size)
+		j = 0;
+		while (j < size)
 		{
-			v1 = ((float *)mat)[j * size + k];
-			v2 = ((float *)vec)[k];
-			((float *)out)[j] += v1 * v2;
-			k++;
+			v1 = ((float *)mat)[j * size + i];
+			v2 = ((float *)vec)[j];
+			((float *)out)[i] += v1 * v2;
+			j++;
 		}
-		j++;
+		i++;
 	}
 }
 
