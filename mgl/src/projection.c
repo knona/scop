@@ -2,12 +2,12 @@
 
 t_mat4x4 perspective(float fovy, float aspect, float near, float far)
 {
-	float tanHalfFovy = tanf(fovy / 2.0f);
+	float tan_half_fovy = tanf(fovy / 2.0f);
 
 	t_mat4x4 proj = g_mat04;
 
-	proj.m00 = 1.0f / (aspect * tanHalfFovy);
-	proj.m11 = 1.0f / (tanHalfFovy);
+	proj.m00 = 1.0f / (aspect * tan_half_fovy);
+	proj.m11 = 1.0f / (tan_half_fovy);
 	proj.m22 = far / (near - far);
 	proj.m23 = -1.0f;
 	proj.m32 = -(far * near) / (far - near);

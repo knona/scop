@@ -1,31 +1,31 @@
 #include "scop.h"
 
-char *getShaderCode(const char *shaderPath, int *outLength)
+char *get_shader_code(const char *shader_path, int *out_length)
 {
 	int   fd;
 	int   ret;
-	char *shaderCode;
+	char *shader_code;
 	char *buffer[SCOP_SHADER_BUFFER];
 
-	shaderCode = NULL;
-	fd = open(shaderPath, O_RDONLY);
+	shader_code = NULL;
+	fd = open(shader_path, O_RDONLY);
 	if (fd == -1)
 		return (error_null("Cannot open file"));
-	*outLength = 0;
+	*out_length = 0;
 	while ((ret = read(fd, buffer, SCOP_SHADER_BUFFER)))
 	{
 		if (ret == -1)
 			return (error_null("Cannot read file"));
-		shaderCode = (char *)realloc(shaderCode, *outLength + ret);
-		if (!shaderCode)
+		shader_code = (char *)realloc(shader_code, *out_length + ret);
+		if (!shader_code)
 			return (error_null("Malloc error"));
-		ft_memcpy(shaderCode + *outLength, buffer, ret);
-		*outLength += ret;
+		ft_memcpy(shader_code + *out_length, buffer, ret);
+		*out_length += ret;
 	}
-	return (shaderCode);
+	return (shader_code);
 }
 
-int checkCompilationSuccess(GLuint shader)
+int check_compilation_success(GLuint shader)
 {
 	int  success;
 	char buffer[500];
@@ -41,18 +41,18 @@ int checkCompilationSuccess(GLuint shader)
 	return (1);
 }
 
-int createShader(GLuint *shader, const GLenum shaderType, const char *shaderPath)
+int create_shader(GLuint *shader, const GLenum shader_type, const char *shader_path)
 {
 	int length;
 
-	*shader = glCreateShader(shaderType);
+	*shader = glCreateShader(shader_type);
 	if (!*shader)
 		return (error_0("Failed to create shader"));
-	const char *shaderCode = getShaderCode(shaderPath, &length);
-	if (!shaderCode)
+	const char *shader_code = get_shader_code(shader_path, &length);
+	if (!shader_code)
 		return (0);
-	glShaderSource(*shader, 1, &shaderCode, &length);
+	glShaderSource(*shader, 1, &shader_code, &length);
 	glCompileShader(*shader);
-	free((void *)shaderCode);
-	return (checkCompilationSuccess(*shader));
+	free((void *)shader_code);
+	return (check_compilation_success(*shader));
 }

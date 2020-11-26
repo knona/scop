@@ -1,9 +1,9 @@
 #include "scop.h"
 
 GLFWwindow *window;
-GLuint      EBO;
-GLuint      VAO;
-GLuint      VBO;
+GLuint      ebo;
+GLuint      vao;
+GLuint      vbo;
 
 int init()
 {

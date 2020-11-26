@@ -1,12 +1,12 @@
 #include "mgl.h"
 
-void print_vec(void *vec, int vecSize)
+void print_vec(void *vec, int vec_size)
 {
 	int   i;
 	char *properties = "xyzw";
 
 	i = 0;
-	while (i < vecSize)
+	while (i < vec_size)
 	{
 		if (i != 0)
 			printf(" ; ");
@@ -16,20 +16,20 @@ void print_vec(void *vec, int vecSize)
 	printf("\n");
 }
 
-void print_mat(void *mat, int matSize)
+void print_mat(void *mat, int mat_size)
 {
 	int i;
 	int j;
 
 	i = 0;
-	while (i < matSize)
+	while (i < mat_size)
 	{
 		j = 0;
-		while (j < matSize)
+		while (j < mat_size)
 		{
 			if (j != 0)
 				printf(" ");
-			printf("%6.2f", ((float *)mat)[j * matSize + i]);
+			printf("%6.2f", ((float *)mat)[j * mat_size + i]);
 			j++;
 		}
 		printf("\n");

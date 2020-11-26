@@ -24,7 +24,7 @@ char *error_null(const char *error);
 /*
 ** SHADER
 */
-int createShader(GLuint *shader, const GLenum shaderType, const char *shaderPath);
+int create_shader(GLuint *shader, const GLenum shaderType, const char *shaderPath);
 
 /*
 ** PROGRAM
