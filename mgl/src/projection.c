@@ -67,10 +67,10 @@ t_mat4x4 ortho(float left, float right, float top, float bottom)
 {
 	t_mat4x4 proj = g_matI4;
 
-	mat4x4set(&proj, 0, 0, 2.0f / (right - left));
-	mat4x4set(&proj, 1, 1, 2.0f / (top - bottom));
-	mat4x4set(&proj, 2, 2, -1.0f);
-	mat4x4set(&proj, 3, 0, -(right + left) / (right - left));
-	mat4x4set(&proj, 3, 1, -(top + bottom) / (top - bottom));
+	proj.m00 = 2.0f / (right - left);
+	proj.m11 = 2.0f / (top - bottom);
+	proj.m22 = -1.0f;
+	proj.m30 = -(right + left) / (right - left);
+	proj.m31 = -(top + bottom) / (top - bottom);
 	return (proj);
 }
