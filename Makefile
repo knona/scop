@@ -6,7 +6,7 @@
 #    By: krambono <krambono@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/24 11:51:46 by krambono          #+#    #+#              #
-#    Updated: 2020/11/26 11:11:44 by krambono         ###   ########lyon.fr    #
+#    Updated: 2020/11/26 11:14:49 by krambono         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ HEADERS					= $(addprefix $(HEADERS_MAIN_DIR), $(HEADERS_FILES))
 GLFW_DIR = libs/glfw
 GLAD_DIR = libs/glad
 FT_DIR = libft
-MGL_DIR = mgl
+MGL_DIR = libmgl
 
 # COMPILATEUR
 CC		= clang
@@ -115,7 +115,7 @@ clean-libft:
 	@echo "$(RED)Removing libft...$(DEFAULT)"
 	@make -sC $(FT_DIR) fclean
 
-clean-mgl:
+clean-libmgl:
 	@echo "$(RED)Removing mgl...$(DEFAULT)"
 	@make -sC $(MGL_DIR) fclean
 
