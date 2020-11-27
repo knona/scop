@@ -35,7 +35,7 @@ int check_compilation_success(GLuint shader)
 	if (!success)
 	{
 		glGetShaderInfoLog(shader, SCOP_GL_ERROR_BUFFER, NULL, buffer);
-		return error_0("Failed to compile shader: %s", buffer);
+		return (error_0("Failed to compile shader: %s", buffer));
 	}
 	return (1);
 }
