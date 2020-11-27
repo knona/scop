@@ -6,7 +6,7 @@
 #    By: krambono <krambono@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/09 13:02:16 by krambono          #+#    #+#              #
-#    Updated: 2020/11/24 17:28:49 by krambono         ###   ########lyon.fr    #
+#    Updated: 2020/11/27 19:15:05 by krambono         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ MEM_DIR 		= mem/
 MEM 			= $(addprefix $(MEM_DIR), $(MEM_FILES))
 
 # STRING
-STRING_FILES	= ft_atoi.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c ft_itoa.c ft_putchar.c ft_putchar_fd.c ft_putendl.c ft_putendl_fd.c ft_putstr.c ft_putstr_fd.c ft_strcat.c ft_strchr.c ft_strchr_i.c ft_strclr.c ft_strcmp.c ft_strcpy.c ft_strdel.c ft_strdup.c ft_strjoin.c ft_strlen.c ft_strncat.c ft_strnchr.c ft_strnchr_i.c ft_strncmp.c ft_strncpy.c ft_strndup.c ft_strnew.c ft_strnstr.c ft_strsplit.c ft_strstr.c ft_strsub.c ft_strtrim.c ft_tolower.c ft_toupper.c
+STRING_FILES	= ft_atoi.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c ft_itoa.c ft_putchar.c ft_putchar_fd.c ft_putendl.c ft_putendl_fd.c ft_putnbr.c ft_putnbr_fd.c ft_putstr.c ft_putstr_fd.c ft_strcat.c ft_strchr.c ft_strchr_i.c ft_strclr.c ft_strcmp.c ft_strcpy.c ft_strdel.c ft_strdup.c ft_strjoin.c ft_strlen.c ft_strncat.c ft_strnchr.c ft_strnchr_i.c ft_strncmp.c ft_strncpy.c ft_strndup.c ft_strnew.c ft_strnstr.c ft_strsplit.c ft_strstr.c ft_strsub.c ft_strtrim.c ft_tolower.c ft_toupper.c
 STRING_DIR 		= string/
 STRING 			= $(addprefix $(STRING_DIR), $(STRING_FILES))
 
