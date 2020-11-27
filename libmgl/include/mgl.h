@@ -84,6 +84,18 @@ extern const t_vec2   g_vec02;
 extern const t_vec3   g_vec03;
 extern const t_vec4   g_vec04;
 
+#define M_PI 3.14159265358979323846
+#define M_PI_2 1.57079632679489661923
+#define M_PI_4 0.78539816339744830962
+#define M_PI_8 0.39269908169872415481
+#define M_PI_16 0.19634954084936207740
+#define M_2XPI 6.28318530717958647692
+#define M_1_PI 0.31830988618379067154
+#define M_2_PI 0.63661977236758134308
+#define M_2_SQRTPI 1.12837916709551257390
+#define M_SQRT2 1.41421356237309504880
+#define M_SQRT1_2 0.70710678118654752440
+
 /*
 ** DOT PRODUCT
 */
@@ -101,9 +113,9 @@ t_vec4   dotmv4x4(const t_mat4x4 *mat, const t_vec4 *vec);
 */
 t_mat4x4 translate(const t_mat4x4 *mat, const t_vec3 *vec);
 t_mat4x4 scale(const t_mat4x4 *mat, const t_vec3 *vec);
-t_mat4x4 rotx(const t_mat4x4 *mat, float angle);
-t_mat4x4 roty(const t_mat4x4 *mat, float angle);
-t_mat4x4 rotz(const t_mat4x4 *mat, float angle);
+t_mat4x4 rotation_x(const t_mat4x4 *mat, float angle);
+t_mat4x4 rotation_y(const t_mat4x4 *mat, float angle);
+t_mat4x4 rotation_z(const t_mat4x4 *mat, float angle);
 
 /*
 ** PROJECTIONS

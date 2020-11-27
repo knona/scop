@@ -18,6 +18,17 @@
 #define SCOP_WIN_WIDTH 1280
 #define SCOP_WIN_HEIGHT 720
 
+struct s_key_cb_params
+{
+	void *      padding;
+	int         mods;
+	int         action;
+	int         scancode;
+	int         key;
+	GLFWwindow *window;
+};
+typedef struct s_key_cb_params t_key_cb_params;
+
 typedef unsigned int uint;
 
 /*

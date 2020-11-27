@@ -5,6 +5,36 @@ GLuint      program;
 GLuint      ebo;
 GLuint      vao;
 GLuint      vbo;
+t_vec2      pos;
+float       rotz;
+int         grow;
+
+void key_callback(t_key_cb_params params)
+{
+	const int speed = 10;
+	const int action = params.action;
+	const int key = params.key;
+
+	if (action == GLFW_PRESS || action == GLFW_REPEAT)
+	{
+		if (key == GLFW_KEY_UP || key == GLFW_KEY_W)
+			pos.y += speed * powf(2, action == GLFW_REPEAT);
+		if (key == GLFW_KEY_DOWN || key == GLFW_KEY_S)
+			pos.y -= speed * powf(2, action == GLFW_REPEAT);
+		if (key == GLFW_KEY_RIGHT || key == GLFW_KEY_D)
+			pos.x += speed * powf(2, action == GLFW_REPEAT);
+		if (key == GLFW_KEY_LEFT || key == GLFW_KEY_A)
+			pos.x -= speed * powf(2, action == GLFW_REPEAT);
+		if (key == GLFW_KEY_LEFT || key == GLFW_KEY_P)
+			rotz += M_PI_16;
+		if (key == GLFW_KEY_LEFT || key == GLFW_KEY_O)
+			rotz -= M_PI_16;
+		if (key == GLFW_KEY_LEFT || key == GLFW_KEY_L)
+			grow += speed * powf(2, action == GLFW_REPEAT);
+		if (key == GLFW_KEY_LEFT || key == GLFW_KEY_K)
+			grow -= speed * powf(2, action == GLFW_REPEAT);
+	}
+}
 
 int clean()
 {
@@ -40,16 +70,17 @@ int init()
 
 	glViewport(0, 0, SCOP_WIN_WIDTH, SCOP_WIN_HEIGHT);
 	// glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-	return 1;
+	glfwSetKeyCallback(window, (void (*)(GLFWwindow *, int, int, int, int))key_callback);
+	return (1);
 }
 
 void create_vao()
 {
 	float cell[] = {
-		0.0f, 1.0f, // top left
-		0.0f, 0.0f, // bottom left
-		1.0f, 1.0f, // top right
-		1.0f, 0.0f, // bottom right
+		-0.5f, +0.5f, // top left
+		-0.5f, -0.5f, // bottom left
+		+0.5f, +0.5f, // top right
+		+0.5f, -0.5f, // bottom right
 	};
 
 	uint indices[] = {
@@ -87,9 +118,10 @@ int renderLoop()
 		glClear(GL_COLOR_BUFFER_BIT);
 		glBindVertexArray(vao);
 		model = g_matI4;
-		t_vec3 vec = { 500, 500, 0 };
+		t_vec3 vec = { pos.x, pos.y, 0 };
 		model = translate(&model, &vec);
-		t_vec3 vec2 = { 100, 100, 1 };
+		model = rotation_z(&model, rotz);
+		t_vec3 vec2 = { grow, grow, 1 };
 		model = scale(&model, &vec2);
 		if (!uniform_set_mat4x4(program, "model", &model))
 			return (0);
@@ -113,9 +145,13 @@ int start(void)
 	create_vao();
 	if (!create_program(&program, "main/shaders/shader.vert", "main/shaders/shader.frag"))
 		return (0);
+	pos.x = 500;
+	pos.y = 500;
+	rotz = 0;
+	grow = 100;
+	glUseProgram(program);
 	view = g_matI4;
 	projection = ortho(0, SCOP_WIN_WIDTH, 0, SCOP_WIN_HEIGHT);
-	glUseProgram(program);
 	if (!uniform_set_mat4x4(program, "view", &view))
 		return (0);
 	if (!uniform_set_mat4x4(program, "projection", &projection))
