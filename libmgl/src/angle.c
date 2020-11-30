@@ -1,11 +1,11 @@
 #include "mgl.h"
 
-float deg_to_rad(float degrees)
+double deg_to_rad(double degrees)
 {
-	return (degrees * M_PI / 180.0f);
+	return (degrees * M_PI / 180.0);
 }
 
-float rad_to_deg(float radians)
+double rad_to_deg(double radians)
 {
-	return (radians * (180.0f / M_PI));
+	return (radians * (180.0 / M_PI));
 }

@@ -111,8 +111,9 @@ t_vec4   dotmv4x4(const t_mat4x4 *mat, const t_vec4 *vec);
 /*
 ** TRANSFORMATIONS
 */
-t_mat4x4 translate(const t_mat4x4 *mat, const t_vec3 *vec);
-t_mat4x4 scale(const t_mat4x4 *mat, const t_vec3 *vec);
+t_mat4x4 translate(const t_mat4x4 *mat, t_vec3 vec);
+t_mat4x4 scale(const t_mat4x4 *mat, t_vec3 vec);
+t_mat4x4 rotate(const t_mat4x4 *mat, float angle, t_vec3 vec);
 t_mat4x4 rotate_x(const t_mat4x4 *mat, float angle);
 t_mat4x4 rotate_y(const t_mat4x4 *mat, float angle);
 t_mat4x4 rotate_z(const t_mat4x4 *mat, float angle);
@@ -154,8 +155,8 @@ void print_vec(void *vec, int vecSize);
 /*
 ** ANGLE
 */
-float deg_to_rad(float degrees);
-float rad_to_deg(float radians);
+double deg_to_rad(double degrees);
+double rad_to_deg(double radians);
 
 /*
 ** GET VECTORS
@@ -163,5 +164,11 @@ float rad_to_deg(float radians);
 t_vec2 get_vec2(float x, float y);
 t_vec3 get_vec3(float x, float y, float z);
 t_vec4 get_vec4(float x, float y, float z, float w);
+
+/*
+** NORME
+*/
+float get_norme(const void *vec, int size);
+void  normalize(void *vec, int size);
 
 #endif // !MGL_H

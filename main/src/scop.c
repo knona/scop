@@ -159,8 +159,7 @@ int renderLoop()
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glBindVertexArray(vao);
 
-		model = rotate_x(&g_matI4, deg_to_rad(-16));
-		model = rotate_y(&model, (float)glfwGetTime() / 1.2f * deg_to_rad(-55));
+		model = rotate(&g_matI4, glfwGetTime() * M_PI_2, get_vec3(1.0f, 0.5f, 0.0f));
 		if (!uniform_set_mat4x4(program, "model", &model))
 			return (0);
 
@@ -176,7 +175,6 @@ int start(void)
 {
 	t_mat4x4 projection;
 	t_mat4x4 view;
-	t_vec3   vec3;
 
 	glEnable(GL_DEPTH_TEST);
 	glClearColor(0.9686f, 0.9765f, 0.9765f, 1.0f);
@@ -192,10 +190,9 @@ int start(void)
 	grow = 100;
 	glUseProgram(program);
 	view = g_matI4;
-	vec3 = get_vec3(0, 0, -3);
 	projection = perspective(
 		deg_to_rad(45), (float)SCOP_WIN_WIDTH / (float)SCOP_WIN_HEIGHT, 0.1f, 100.0f);
-	view = translate(&g_matI4, &vec3);
+	view = translate(&g_matI4, get_vec3(0, 0, -3));
 
 	if (!uniform_set_mat4x4(program, "projection", &projection))
 		return (0);
