@@ -159,7 +159,7 @@ int renderLoop()
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glBindVertexArray(vao);
 
-		model = rotate(&g_matI4, glfwGetTime() * M_PI_2, get_vec3(1.0f, 0.5f, 0.0f));
+		model = rotate(&g_matI4, glfwGetTime() * M_PI_2, get_vec3(0.5f, 1, 0));
 		if (!uniform_set_mat4x4(program, "model", &model))
 			return (0);
 
