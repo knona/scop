@@ -6,7 +6,6 @@ t_mat4x4 perspective(float fovy, float aspect, float near, float far)
 	t_mat4x4 proj;
 
 	proj = g_mat04;
-	fovy = fovy * 0.5f * M_PI / 180;
 	tan_half_fovy = tanf(fovy / 2.0f);
 	proj.m00 = 1.0f / (aspect * tan_half_fovy);
 	proj.m11 = 1.0f / (tan_half_fovy);
@@ -25,7 +24,6 @@ t_mat4x4 perspective2(float fovy, float aspect, float near, float far)
 	t_mat4x4 proj;
 
 	proj = g_mat04;
-	fovy = fovy * 0.5f * M_PI / 180;
 	top = tanf(fovy) * near;
 	right = aspect * top;
 	left = -right;
@@ -48,8 +46,7 @@ t_mat4x4 perspective3(float fovy, float aspect, float near, float far)
 	t_mat4x4 proj;
 
 	proj = g_mat04;
-	// float scale = tanf(fovy * 0.5f * M_PI / 180) * near;
-	top = tanf(fovy * 0.5f * M_PI / 180) * near;
+	top = tanf(fovy) * near;
 	right = aspect * top;
 	left = -right;
 	bottom = -top;
@@ -61,7 +58,6 @@ t_mat4x4 perspective3(float fovy, float aspect, float near, float far)
 	proj.m22 = -(far + near) / (far - near);
 	proj.m23 = -1;
 	proj.m32 = -2 * far * near / (far - near);
-	// return (transpose4x4(&proj));
 	return (proj);
 }
 

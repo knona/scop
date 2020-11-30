@@ -153,4 +153,10 @@ void mat4x4set(t_mat4x4 *mat, int x, int y, float value);
 void print_mat(void *mat, int matSize);
 void print_vec(void *vec, int vecSize);
 
+/*
+** UTILITIES
+*/
+float deg_to_rad(float degrees);
+float rad_to_deg(float radians);
+
 #endif // !MGL_H
