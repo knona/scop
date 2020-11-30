@@ -76,28 +76,69 @@ int init()
 
 void create_vao()
 {
-	float cell[] = {
-		-0.5f, +0.5f, // top left
-		-0.5f, -0.5f, // bottom left
-		+0.5f, +0.5f, // top right
-		+0.5f, -0.5f, // bottom right
+	float cube[] = {
+		-0.5f, -0.5f, -0.5f, 0.37f, 0.46f, 0.37f, //
+		0.5f,  -0.5f, -0.5f, 0.37f, 0.46f, 0.37f, //
+		0.5f,  0.5f,  -0.5f, 0.37f, 0.46f, 0.37f, //
+		0.5f,  0.5f,  -0.5f, 0.37f, 0.46f, 0.37f, //
+		-0.5f, 0.5f,  -0.5f, 0.37f, 0.46f, 0.37f, //
+		-0.5f, -0.5f, -0.5f, 0.37f, 0.46f, 0.37f, //
+
+		-0.5f, -0.5f, 0.5f,  0.37f, 0.18f, 0.47f, //
+		0.5f,  -0.5f, 0.5f,  0.37f, 0.18f, 0.47f, //
+		0.5f,  0.5f,  0.5f,  0.37f, 0.18f, 0.47f, //
+		0.5f,  0.5f,  0.5f,  0.37f, 0.18f, 0.47f, //
+		-0.5f, 0.5f,  0.5f,  0.37f, 0.18f, 0.47f, //
+		-0.5f, -0.5f, 0.5f,  0.37f, 0.18f, 0.47f, //
+
+		-0.5f, 0.5f,  0.5f,  0.37f, 0.62f, 0.63f, //
+		-0.5f, 0.5f,  -0.5f, 0.37f, 0.62f, 0.63f, //
+		-0.5f, -0.5f, -0.5f, 0.37f, 0.62f, 0.63f, //
+		-0.5f, -0.5f, -0.5f, 0.37f, 0.62f, 0.63f, //
+		-0.5f, -0.5f, 0.5f,  0.37f, 0.62f, 0.63f, //
+		-0.5f, 0.5f,  0.5f,  0.37f, 0.62f, 0.63f, //
+
+		0.5f,  0.5f,  0.5f,  0.38f, 0.69f, 1.0f, //
+		0.5f,  0.5f,  -0.5f, 0.38f, 0.69f, 1.0f, //
+		0.5f,  -0.5f, -0.5f, 0.38f, 0.69f, 1.0f, //
+		0.5f,  -0.5f, -0.5f, 0.38f, 0.69f, 1.0f, //
+		0.5f,  -0.5f, 0.5f,  0.38f, 0.69f, 1.0f, //
+		0.5f,  0.5f,  0.5f,  0.38f, 0.69f, 1.0f, //
+
+		-0.5f, -0.5f, -0.5f, 0.40f, 0.0f,  1.0f, //
+		0.5f,  -0.5f, -0.5f, 0.40f, 0.0f,  1.0f, //
+		0.5f,  -0.5f, 0.5f,  0.40f, 0.0f,  1.0f, //
+		0.5f,  -0.5f, 0.5f,  0.40f, 0.0f,  1.0f, //
+		-0.5f, -0.5f, 0.5f,  0.40f, 0.0f,  1.0f, //
+		-0.5f, -0.5f, -0.5f, 0.40f, 0.0f,  1.0f, //
+
+		-0.5f, 0.5f,  -0.5f, 0.55f, 0.24f, 0.18f, //
+		0.5f,  0.5f,  -0.5f, 0.55f, 0.24f, 0.18f, //
+		0.5f,  0.5f,  0.5f,  0.55f, 0.24f, 0.18f, //
+		0.5f,  0.5f,  0.5f,  0.55f, 0.24f, 0.18f, //
+		-0.5f, 0.5f,  0.5f,  0.55f, 0.24f, 0.18f, //
+		-0.5f, 0.5f,  -0.5f, 0.55f, 0.24f, 0.18f  //
 	};
 
-	uint indices[] = {
-		0, 1, 2, // first triangle
-		1, 2, 3  // second triangle
-	};
+	// uint indices[] = {
+	// 	0, 1, 2, // first triangle
+	// 	1, 2, 3  // second triangle
+	// };
 
 	glBindVertexArray(vao);
 
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+	// glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+	// glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(cell), cell, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(cube), cube, GL_STATIC_DRAW);
 
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void *)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *)0);
 	glEnableVertexAttribArray(0);
+
+	glVertexAttribPointer(
+		1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *)(3 * sizeof(float)));
+	glEnableVertexAttribArray(1);
 
 	glBindVertexArray(0);
 }
@@ -115,29 +156,29 @@ int renderLoop()
 	while (!glfwWindowShouldClose(window))
 	{
 		processInput(window);
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glBindVertexArray(vao);
-		model = g_matI4;
-		t_vec3 vec = { pos.x, pos.y, 0 };
-		model = translate(&model, &vec);
-		model = rotation_z(&model, rotz);
-		t_vec3 vec2 = { grow, grow, 1 };
-		model = scale(&model, &vec2);
+
+		model = rotate_x(&g_matI4, deg_to_rad(-16));
+		model = rotate_y(&model, (float)glfwGetTime() / 1.2f * deg_to_rad(-55));
 		if (!uniform_set_mat4x4(program, "model", &model))
 			return (0);
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+		glDrawArrays(GL_TRIANGLES, 0, 36);
 		glBindVertexArray(0);
 		glfwSwapBuffers(window);
-		glfwWaitEvents();
+		glfwPollEvents();
 	}
 	return (1);
 }
 
 int start(void)
 {
-	t_mat4x4 view;
 	t_mat4x4 projection;
+	t_mat4x4 view;
+	t_vec3   vec3;
 
+	glEnable(GL_DEPTH_TEST);
 	glClearColor(0.9686f, 0.9765f, 0.9765f, 1.0f);
 	glGenVertexArrays(1, &vao);
 	glGenBuffers(1, &ebo);
@@ -151,11 +192,16 @@ int start(void)
 	grow = 100;
 	glUseProgram(program);
 	view = g_matI4;
-	projection = ortho(0, SCOP_WIN_WIDTH, 0, SCOP_WIN_HEIGHT);
-	if (!uniform_set_mat4x4(program, "view", &view))
-		return (0);
+	vec3 = get_vec3(0, 0, -3);
+	projection = perspective(
+		deg_to_rad(45), (float)SCOP_WIN_WIDTH / (float)SCOP_WIN_HEIGHT, 0.1f, 100.0f);
+	view = translate(&g_matI4, &vec3);
+
 	if (!uniform_set_mat4x4(program, "projection", &projection))
 		return (0);
+	if (!uniform_set_mat4x4(program, "view", &view))
+		return (0);
+
 	if (!renderLoop())
 		return (0);
 	return (1);

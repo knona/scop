@@ -2,7 +2,7 @@
 
 float deg_to_rad(float degrees)
 {
-	return (degrees * M_PI / 180.0);
+	return (degrees * M_PI / 180.0f);
 }
 
 float rad_to_deg(float radians)

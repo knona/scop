@@ -25,7 +25,7 @@ char *get_shader_code(const char *shader_path, int *out_length)
 	return (shader_code);
 }
 
-int check_compilation_success(GLuint shader)
+int check_compilation_success(GLuint shader, const char *shader_path)
 {
 	int  success;
 	char buffer[SCOP_GL_ERROR_BUFFER];
@@ -35,7 +35,7 @@ int check_compilation_success(GLuint shader)
 	if (!success)
 	{
 		glGetShaderInfoLog(shader, SCOP_GL_ERROR_BUFFER, NULL, buffer);
-		return (error_0("Failed to compile shader: %s", buffer));
+		return (error_0("Failed to compile shader \"%s\":\ns%s", shader_path, buffer));
 	}
 	return (1);
 }
@@ -53,5 +53,5 @@ int create_shader(GLuint *shader, const GLenum shader_type, const char *shader_p
 	glShaderSource(*shader, 1, &shader_code, &length);
 	glCompileShader(*shader);
 	free((void *)shader_code);
-	return (check_compilation_success(*shader));
+	return (check_compilation_success(*shader, shader_path));
 }

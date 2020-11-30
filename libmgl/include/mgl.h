@@ -120,10 +120,8 @@ t_mat4x4 rotate_z(const t_mat4x4 *mat, float angle);
 /*
 ** PROJECTIONS
 */
-t_mat4x4 ortho(float left, float right, float bottom, float top);
 t_mat4x4 perspective(float fovy, float aspect, float near, float far);
-t_mat4x4 perspective2(float fovy, float aspect, float near, float far);
-t_mat4x4 perspective3(float fovy, float aspect, float near, float far);
+t_mat4x4 ortho(float left, float right, float bottom, float top);
 
 /*
 ** TRANSPOSE
