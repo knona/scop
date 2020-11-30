@@ -60,23 +60,22 @@ t_mat4x4 rotate_z(const t_mat4x4 *mat, float angle)
 
 t_mat4x4 rotate(const t_mat4x4 *mat, float angle, t_vec3 vec)
 {
-	float    cos_a;
-	float    sin_a;
-	t_mat4x4 transf;
+	t_vec4   q;
+	t_mat4x4 transf = g_matI4;
 
-	transf = g_matI4;
 	normalize(&vec, 3);
-	cos_a = cosf(angle);
-	sin_a = sinf(angle);
-
-	transf.m00 = cos_a + (1 - cos_a) * vec.x * vec.x;
-	transf.m01 = (1 - cos_a) * vec.x * vec.y - sin_a * vec.z;
-	transf.m02 = (1 - cos_a) * vec.x * vec.z + sin_a * vec.y;
-	transf.m10 = (1 - cos_a) * vec.x * vec.y + sin_a * vec.z;
-	transf.m11 = cos_a + (1 - cos_a) * vec.y * vec.y;
-	transf.m12 = (1 - cos_a) * vec.y * vec.z - sin_a * vec.x;
-	transf.m20 = (1 - cos_a) * vec.x * vec.z - sin_a * vec.y;
-	transf.m21 = (1 - cos_a) * vec.y * vec.z + sin_a * vec.x;
-	transf.m22 = cos_a + (1 - cos_a) * vec.z * vec.z;
+	q.x = sinf(angle / 2.0f) * vec.x;
+	q.y = sinf(angle / 2.0f) * vec.y;
+	q.z = sinf(angle / 2.0f) * vec.z;
+	q.w = cosf(angle / 2.0f);
+	transf.m00 = q.w * q.w + q.x * q.x - q.y * q.y - q.z * q.z;
+	transf.m01 = 2 * q.x * q.y + 2 * q.w * q.z;
+	transf.m02 = 2 * q.x * q.z - 2 * q.w * q.y;
+	transf.m10 = 2 * q.x * q.y - 2 * q.w * q.z;
+	transf.m11 = q.w * q.w - q.x * q.x + q.y * q.y - q.z * q.z;
+	transf.m12 = 2 * q.y * q.z + 2 * q.w * q.x;
+	transf.m20 = 2 * q.x * q.z + 2 * q.w * q.y;
+	transf.m21 = 2 * q.y * q.z - 2 * q.w * q.x;
+	transf.m22 = q.w * q.w - q.x * q.x - q.y * q.y + q.z * q.z;
 	return (dotmm4x4(mat, &transf));
 }
