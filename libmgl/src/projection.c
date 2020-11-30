@@ -2,10 +2,12 @@
 
 t_mat4x4 perspective(float fovy, float aspect, float near, float far)
 {
-	float tan_half_fovy = tanf(fovy / 2.0f);
+	float    tan_half_fovy;
+	t_mat4x4 proj;
 
-	t_mat4x4 proj = g_mat04;
-
+	proj = g_mat04;
+	fovy = fovy * 0.5f * M_PI / 180;
+	tan_half_fovy = tanf(fovy / 2.0f);
 	proj.m00 = 1.0f / (aspect * tan_half_fovy);
 	proj.m11 = 1.0f / (tan_half_fovy);
 	proj.m22 = far / (near - far);
@@ -23,17 +25,17 @@ t_mat4x4 perspective2(float fovy, float aspect, float near, float far)
 	t_mat4x4 proj;
 
 	proj = g_mat04;
-	top = near * tanf(fovy / 2.0f);
-	bottom = -top;
-	right = top * aspect;
+	fovy = fovy * 0.5f * M_PI / 180;
+	top = tanf(fovy) * near;
+	right = aspect * top;
 	left = -right;
-	((float *)&proj)[0] = 2 * near / (right - left);
-	((float *)&proj)[5] = 2 * near / (top - bottom);
-	((float *)&proj)[10] = -(far + near) / (far - near);
-	((float *)&proj)[11] = -1;
-	((float *)&proj)[12] = -near * (left + right) / (right - left);
-	((float *)&proj)[13] = -near * (bottom + top) / (top - bottom);
-	((float *)&proj)[14] = 2 * near * far / (near - far);
+	bottom = -top;
+
+	proj.m00 = near / right;
+	proj.m11 = near / top;
+	proj.m22 = -(far + near) / (far - near);
+	proj.m23 = -1;
+	proj.m32 = -2 * far * near / (far - near);
 	return (proj);
 }
 
