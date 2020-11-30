@@ -22,7 +22,7 @@ t_mat4x4 scale(const t_mat4x4 *mat, const t_vec3 *vec)
 	return (dotmm4x4(mat, &transf));
 }
 
-t_mat4x4 rotation_x(const t_mat4x4 *mat, float angle)
+t_mat4x4 rotate_x(const t_mat4x4 *mat, float angle)
 {
 	t_mat4x4 transf = g_matI4;
 
@@ -34,7 +34,7 @@ t_mat4x4 rotation_x(const t_mat4x4 *mat, float angle)
 	return (dotmm4x4(mat, &transf));
 }
 
-t_mat4x4 rotation_y(const t_mat4x4 *mat, float angle)
+t_mat4x4 rotate_y(const t_mat4x4 *mat, float angle)
 {
 	t_mat4x4 transf = g_matI4;
 
@@ -46,7 +46,7 @@ t_mat4x4 rotation_y(const t_mat4x4 *mat, float angle)
 	return (dotmm4x4(mat, &transf));
 }
 
-t_mat4x4 rotation_z(const t_mat4x4 *mat, float angle)
+t_mat4x4 rotate_z(const t_mat4x4 *mat, float angle)
 {
 	t_mat4x4 transf = g_matI4;
 

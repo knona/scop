@@ -113,9 +113,9 @@ t_vec4   dotmv4x4(const t_mat4x4 *mat, const t_vec4 *vec);
 */
 t_mat4x4 translate(const t_mat4x4 *mat, const t_vec3 *vec);
 t_mat4x4 scale(const t_mat4x4 *mat, const t_vec3 *vec);
-t_mat4x4 rotation_x(const t_mat4x4 *mat, float angle);
-t_mat4x4 rotation_y(const t_mat4x4 *mat, float angle);
-t_mat4x4 rotation_z(const t_mat4x4 *mat, float angle);
+t_mat4x4 rotate_x(const t_mat4x4 *mat, float angle);
+t_mat4x4 rotate_y(const t_mat4x4 *mat, float angle);
+t_mat4x4 rotate_z(const t_mat4x4 *mat, float angle);
 
 /*
 ** PROJECTIONS
