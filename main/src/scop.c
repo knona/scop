@@ -5,34 +5,25 @@ GLuint      program;
 GLuint      ebo;
 GLuint      vao;
 GLuint      vbo;
-t_vec2      pos;
-float       rotz;
-int         grow;
 
-void key_callback(t_key_cb_params params)
+void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods)
 {
-	const int speed = 10;
-	const int action = params.action;
-	const int key = params.key;
+	(void)window;
+	(void)key;
+	(void)scancode;
+	(void)action;
+	(void)mods;
 
 	if (action == GLFW_PRESS || action == GLFW_REPEAT)
 	{
-		if (key == GLFW_KEY_UP || key == GLFW_KEY_W)
-			pos.y += speed * powf(2, action == GLFW_REPEAT);
-		if (key == GLFW_KEY_DOWN || key == GLFW_KEY_S)
-			pos.y -= speed * powf(2, action == GLFW_REPEAT);
-		if (key == GLFW_KEY_RIGHT || key == GLFW_KEY_D)
-			pos.x += speed * powf(2, action == GLFW_REPEAT);
-		if (key == GLFW_KEY_LEFT || key == GLFW_KEY_A)
-			pos.x -= speed * powf(2, action == GLFW_REPEAT);
 		if (key == GLFW_KEY_LEFT || key == GLFW_KEY_P)
-			rotz += M_PI_16;
+			;
 		if (key == GLFW_KEY_LEFT || key == GLFW_KEY_O)
-			rotz -= M_PI_16;
+			;
 		if (key == GLFW_KEY_LEFT || key == GLFW_KEY_L)
-			grow += speed * powf(2, action == GLFW_REPEAT);
+			;
 		if (key == GLFW_KEY_LEFT || key == GLFW_KEY_K)
-			grow -= speed * powf(2, action == GLFW_REPEAT);
+			;
 	}
 }
 
@@ -184,10 +175,6 @@ int start(void)
 	create_vao();
 	if (!create_program(&program, "main/shaders/shader.vert", "main/shaders/shader.frag"))
 		return (0);
-	pos.x = 500;
-	pos.y = 500;
-	rotz = 0;
-	grow = 100;
 	glUseProgram(program);
 	view = g_matI4;
 	projection = perspective(
