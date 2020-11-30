@@ -154,9 +154,16 @@ void print_mat(void *mat, int matSize);
 void print_vec(void *vec, int vecSize);
 
 /*
-** UTILITIES
+** ANGLE
 */
 float deg_to_rad(float degrees);
 float rad_to_deg(float radians);
+
+/*
+** GET VECTORS
+*/
+t_vec2 get_vec2(float x, float y);
+t_vec3 get_vec3(float x, float y, float z);
+t_vec4 get_vec4(float x, float y, float z, float w);
 
 #endif // !MGL_H
