@@ -18,7 +18,7 @@
 # include "ft_limits.h"
 # define GNL_READ 1
 # define GNL_FREE 2
-# define GNL_BUFF_SIZE 200
+# define GNL_BUFF_SIZE 500
 
 /*
 ****************************** STRINGS *****************************************
