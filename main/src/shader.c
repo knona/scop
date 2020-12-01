@@ -22,6 +22,7 @@ char *get_shader_code(const char *shader_path, int *out_length)
 		ft_memcpy(shader_code + *out_length, buffer, ret);
 		*out_length += ret;
 	}
+	close(fd);
 	return (shader_code);
 }
 
