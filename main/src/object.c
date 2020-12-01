@@ -31,7 +31,6 @@ int set_uniform_matrices(t_object *obj)
 
 int init_object(t_object *obj)
 {
-	ft_bzero(obj, sizeof(t_object));
 	glGenVertexArrays(1, &obj->vao);
 	glGenBuffers(1, &obj->ebo);
 	glGenBuffers(1, &obj->vbo);

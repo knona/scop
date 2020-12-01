@@ -66,6 +66,6 @@ void clean_object(t_object *obj);
 /*
 ** PARSE
 */
-t_object parse_obj_file(const char *path);
+int parse_obj_file(const char *path, t_object *obj);
 
 #endif // !SCOP_H

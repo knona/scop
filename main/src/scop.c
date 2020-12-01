@@ -90,10 +90,12 @@ int main(int argc, const char **argv)
 {
 	GLFWwindow *window;
 	int         ret;
+	t_object    obj;
 
 	if (argc != 2)
 		return (error_int(1, "Path to .obj file is required"));
-	t_object obj = parse_obj_file(argv[1]);
+	if (!parse_obj_file(argv[1], &obj))
+		return (1);
 	window = NULL;
 	if (!init_window(window))
 		return (1);
