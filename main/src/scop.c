@@ -12,6 +12,8 @@ void scroll_callback(GLFWwindow *window, double xoffset, double yoffset)
 {
 	const float speed = 0.2;
 
+	(void)window;
+	(void)xoffset;
 	if (yoffset > 0)
 		pos.z += speed;
 	if (yoffset < 0)

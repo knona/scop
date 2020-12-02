@@ -37,7 +37,7 @@ int add_indices(t_object *obj, const uint *indices)
 int process_line(t_object *obj, char *line)
 {
 	int    i;
-	uint   indices[3];
+	uint   indices[4];
 	t_vec3 vec;
 	char * end;
 
@@ -63,8 +63,17 @@ int process_line(t_object *obj, char *line)
 		indices[1] = strtoul(line + i, &end, 10) - 1;
 		i = end - line;
 		indices[2] = strtoul(line + i, &end, 10) - 1;
+		i = end - line;
 		if (!add_indices(obj, indices))
 			return (0);
+		while (line[i] == ' ')
+			i++;
+		if (line[i] != '\0')
+		{
+			indices[1] = strtoul(line + i, &end, 10) - 1;
+			if (!add_indices(obj, indices))
+				return (0);
+		}
 	}
 	return (1);
 }
