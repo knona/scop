@@ -156,14 +156,14 @@ int renderLoop(GLFWwindow *window, t_object *obj)
 
 void display_commands()
 {
-	ft_printf("Commands: \n");
-	ft_printf("Move (x y axis):  \033[36mw / a / s / d\033[0m or  "
+	ft_printf("Commands:\n");
+	ft_printf("Move (x y axis): \033[36mw / a / s / d\033[0m or "
 			  "\033[36mmouse\033[0m (left click)\n");
-	ft_printf("Move (z axis):  \033[36mo / p\033[0m or "
+	ft_printf("Move (z axis): \033[36mo / p\033[0m or "
 			  "\033[36mscroll\033[0m\n");
-	ft_printf("Rotation (x axis):  \033[36mk / l\033[0m \n");
-	ft_printf("Pause the rotation:  \033[36mspace\033[0m \n");
-	ft_printf("Fill polygons:  \033[36mf\033[0m \n");
+	ft_printf("Rotation (x axis): \033[36mk / l\033[0m \n");
+	ft_printf("Pause the rotation: \033[36mspace\033[0m \n");
+	ft_printf("Fill polygons: \033[36mf\033[0m \n");
 }
 
 int start(GLFWwindow *window, t_object *obj)
