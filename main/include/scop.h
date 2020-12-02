@@ -23,18 +23,30 @@
 
 typedef unsigned int uint;
 
+struct s_range
+{
+	float x_min;
+	float x_max;
+	float y_min;
+	float y_max;
+	float z_min;
+	float z_max;
+};
+typedef struct s_range t_range;
+
 struct s_object
 {
-	GLuint vao;
-	GLuint ebo;
-	GLuint vbo;
-	GLuint program;
-	float *vertices;
-	uint * indices;
-	int    vertices_size;
-	int    indices_size;
-	int    vertices_max_size;
-	int    indices_max_size;
+	GLuint  vao;
+	GLuint  ebo;
+	GLuint  vbo;
+	GLuint  program;
+	float * vertices;
+	uint *  indices;
+	int     vertices_size;
+	int     indices_size;
+	int     vertices_max_size;
+	int     indices_max_size;
+	t_range range;
 };
 typedef struct s_object t_object;
 

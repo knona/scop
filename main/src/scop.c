@@ -8,6 +8,7 @@ int      l_click;
 t_cursor curs_pos;
 t_vec3   pos_cpy;
 float    rotx;
+GLuint   program;
 
 void init_options(void)
 {
@@ -19,9 +20,19 @@ void init_options(void)
 	rotx = 0;
 }
 
+void framebuffer_size_callback(GLFWwindow *window, int width, int height)
+{
+	t_mat4x4 projection;
+
+	(void)window;
+	glViewport(0, 0, width, height);
+	projection = perspective(deg_to_rad(30), (float)width / (float)height, 0.1f, 100.0f);
+	uniform_set_mat4x4(program, "projection", &projection);
+}
+
 void scroll_callback(GLFWwindow *window, double xoffset, double yoffset)
 {
-	const float speed = 0.2;
+	const float speed = 0.15;
 
 	(void)window;
 	(void)xoffset;
@@ -36,8 +47,8 @@ void cursor_position_callback(GLFWwindow *window, double xpos, double ypos)
 	(void)window;
 	if (l_click)
 	{
-		pos.x = pos_cpy.x - (curs_pos.x - xpos) / 100;
-		pos.y = pos_cpy.y + (curs_pos.y - ypos) / 100;
+		pos.x = pos_cpy.x - (curs_pos.x - xpos) / 200;
+		pos.y = pos_cpy.y + (curs_pos.y - ypos) / 200;
 	}
 }
 
@@ -114,7 +125,8 @@ int init_window(GLFWwindow **window)
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 		return (error_0("Failed to initialize GLAD"));
 	glViewport(0, 0, SCOP_WIN_WIDTH, SCOP_WIN_HEIGHT);
-	// glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+	glfwSetWindowSizeLimits(*window, 400, 225, GLFW_DONT_CARE, GLFW_DONT_CARE);
+	glfwSetFramebufferSizeCallback(*window, framebuffer_size_callback);
 	glfwSetKeyCallback(*window, (void (*)(GLFWwindow *, int, int, int, int))key_callback);
 	glfwSetMouseButtonCallback(*window, mouse_button_callback);
 	glfwSetCursorPosCallback(*window, cursor_position_callback);
@@ -131,6 +143,25 @@ void processInput(GLFWwindow *window)
 int renderLoop(GLFWwindow *window, t_object *obj)
 {
 	t_mat4x4 model;
+	float    x;
+	float    y;
+	float    z;
+	float    scaling;
+	float    max;
+	float    abs_value;
+
+	x = (obj->range.x_max + obj->range.x_min) / 2;
+	y = (obj->range.y_max + obj->range.y_min) / 2;
+	z = (obj->range.z_max + obj->range.z_min) / 2;
+
+	max = 1;
+	for (int i = 0; i < 6; i++)
+	{
+		abs_value = fabsf(((float *)(&obj->range))[i]);
+		if (abs_value > max)
+			max = abs_value;
+	}
+	scaling = max != 0 ? 2 / max : 1;
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -138,9 +169,10 @@ int renderLoop(GLFWwindow *window, t_object *obj)
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glBindVertexArray(obj->vao);
 		model = translate(&g_matI4, pos);
-		// model = scale(&model, get_vec3(0.1f, 0.1f, 0.1f));
+		model = scale(&model, get_vec3(scaling, scaling, scaling));
 		model = rotate_y(&model, time * M_2_PI);
 		model = rotate_x(&model, rotx);
+		model = translate(&model, get_vec3(-x, -y, -z));
 		if (!uniform_set_mat4x4(obj->program, "model", &model))
 			return (0);
 
@@ -173,6 +205,7 @@ int start(GLFWwindow *window, t_object *obj)
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 	if (!init_object(obj))
 		return (0);
+	program = obj->program;
 	display_commands();
 	if (!renderLoop(window, obj))
 		return (0);

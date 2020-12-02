@@ -36,20 +36,46 @@ int add_indices(t_object *obj, const uint *indices)
 
 int process_vertex(t_object *obj, const char *line)
 {
-	int   i;
-	int   j;
-	float vertex[3];
-	char *end;
+	static int first = 1;
+	int        i;
+	int        j;
+	t_vec3     vertex;
+	char *     end;
 
 	i = 0;
 	j = 0;
 	while (j < 3)
 	{
-		vertex[j] = strtof(line + i, &end);
+		((float *)&vertex)[j] = strtof(line + i, &end);
 		i = end - line;
 		j++;
 	}
-	if (!add_vertex(obj, vertex))
+	if (first)
+	{
+		obj->range.x_max = vertex.x;
+		obj->range.x_min = vertex.x;
+		obj->range.y_max = vertex.y;
+		obj->range.y_min = vertex.y;
+		obj->range.z_max = vertex.z;
+		obj->range.z_min = vertex.z;
+		first = 0;
+	}
+	else
+	{
+		if (vertex.x > obj->range.x_max)
+			obj->range.x_max = vertex.x;
+		if (vertex.x < obj->range.x_min)
+			obj->range.x_min = vertex.x;
+		if (vertex.y > obj->range.y_max)
+			obj->range.y_max = vertex.y;
+		if (vertex.y < obj->range.y_min)
+			obj->range.y_min = vertex.y;
+		if (vertex.z > obj->range.z_max)
+			obj->range.z_max = vertex.z;
+		if (vertex.z < obj->range.z_min)
+			obj->range.z_min = vertex.z;
+	}
+	if (!add_vertex(obj, (float *)&vertex))
 		return (0);
 	return (1);
 }
