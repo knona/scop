@@ -44,12 +44,17 @@ int init_object(t_object *obj)
 
 void clean_object(t_object *obj)
 {
-	if (!obj->program)
+	if (obj->indices)
+		free(obj->indices);
+	if (obj->vertices)
+		free(obj->vertices);
+	if (obj->program)
 		glDeleteProgram(obj->program);
-	if (!obj->vao)
+	if (obj->vao)
 		glDeleteVertexArrays(1, &obj->vao);
-	if (!obj->ebo)
+	if (obj->ebo)
 		glDeleteBuffers(1, &obj->ebo);
-	if (!obj->vbo)
+	if (obj->vbo)
 		glDeleteBuffers(1, &obj->vbo);
+	ft_bzero(obj, sizeof(t_object));
 }

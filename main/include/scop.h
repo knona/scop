@@ -9,12 +9,15 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <stdarg.h>
+#include <stdlib.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
 
 #define SCOP_SHADER_BUFFER 200
 #define SCOP_GL_ERROR_BUFFER 500
+#define SCOP_VERTICES_BUFFER 1000
+#define SCOP_INDICES_BUFFER 1000
 #define SCOP_WIN_WIDTH 1280
 #define SCOP_WIN_HEIGHT 720
 
@@ -27,9 +30,11 @@ struct s_object
 	GLuint vbo;
 	GLuint program;
 	float *vertices;
-	float *indices;
+	uint * indices;
 	int    vertices_size;
 	int    indices_size;
+	int    vertices_max_size;
+	int    indices_max_size;
 };
 typedef struct s_object t_object;
 
