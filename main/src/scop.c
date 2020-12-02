@@ -7,6 +7,17 @@ int      line_mode;
 int      l_click;
 t_cursor curs_pos;
 t_vec3   pos_cpy;
+float    rotx;
+
+void init_options(void)
+{
+	ft_bzero(&pos, 3 * sizeof(float));
+	scop_pause = 0;
+	time = 0;
+	line_mode = 1;
+	l_click = 0;
+	rotx = 0;
+}
 
 void scroll_callback(GLFWwindow *window, double xoffset, double yoffset)
 {
@@ -66,8 +77,14 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
 			pos.z += speed * (1 << (int)(action == GLFW_REPEAT));
 		if (key == GLFW_KEY_O)
 			pos.z -= speed * (1 << (int)(action == GLFW_REPEAT));
+		if (key == GLFW_KEY_N)
+			rotx += speed * (1 << (int)(action == GLFW_REPEAT));
+		if (key == GLFW_KEY_M)
+			rotx -= speed * (1 << (int)(action == GLFW_REPEAT));
 		if (key == GLFW_KEY_ENTER)
 			scop_pause = !scop_pause;
+		if (key == GLFW_KEY_R)
+			init_options();
 		if (key == GLFW_KEY_F)
 		{
 			line_mode = !line_mode;
@@ -122,7 +139,9 @@ int renderLoop(GLFWwindow *window, t_object *obj)
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glBindVertexArray(obj->vao);
 		model = translate(&g_matI4, pos);
-		model = rotate(&model, time * M_PI_2, get_vec3(0, 1, 0));
+		// model = scale(&model, get_vec3(0.1f, 0.1f, 0.1f));
+		model = rotate_y(&model, time * M_2_PI);
+		model = rotate_x(&model, rotx);
 		if (!uniform_set_mat4x4(obj->program, "model", &model))
 			return (0);
 
@@ -138,11 +157,7 @@ int renderLoop(GLFWwindow *window, t_object *obj)
 
 int start(GLFWwindow *window, t_object *obj)
 {
-	ft_bzero(&pos, 3 * sizeof(float));
-	scop_pause = 0;
-	time = 0;
-	line_mode = 1;
-	l_click = 0;
+	init_options();
 	glEnable(GL_DEPTH_TEST);
 	glClearColor(0.9686f, 0.9765f, 0.9765f, 1.0f);
 	if (!init_object(obj))
