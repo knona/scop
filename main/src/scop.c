@@ -77,9 +77,9 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
 			pos.z += speed * (1 << (int)(action == GLFW_REPEAT));
 		if (key == GLFW_KEY_O)
 			pos.z -= speed * (1 << (int)(action == GLFW_REPEAT));
-		if (key == GLFW_KEY_N)
+		if (key == GLFW_KEY_K)
 			rotx += speed * (1 << (int)(action == GLFW_REPEAT));
-		if (key == GLFW_KEY_M)
+		if (key == GLFW_KEY_L)
 			rotx -= speed * (1 << (int)(action == GLFW_REPEAT));
 		if (key == GLFW_KEY_SPACE)
 			scop_pause = !scop_pause;
