@@ -14,7 +14,7 @@ void init_options(void)
 	ft_bzero(&pos, 3 * sizeof(float));
 	scop_pause = 0;
 	time = 0;
-	line_mode = 1;
+	line_mode = 0;
 	l_click = 0;
 	rotx = 0;
 }
@@ -81,7 +81,7 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
 			rotx += speed * (1 << (int)(action == GLFW_REPEAT));
 		if (key == GLFW_KEY_M)
 			rotx -= speed * (1 << (int)(action == GLFW_REPEAT));
-		if (key == GLFW_KEY_ENTER)
+		if (key == GLFW_KEY_SPACE)
 			scop_pause = !scop_pause;
 		if (key == GLFW_KEY_R)
 			init_options();
@@ -114,7 +114,6 @@ int init_window(GLFWwindow **window)
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 		return (error_0("Failed to initialize GLAD"));
 	glViewport(0, 0, SCOP_WIN_WIDTH, SCOP_WIN_HEIGHT);
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	// glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 	glfwSetKeyCallback(*window, (void (*)(GLFWwindow *, int, int, int, int))key_callback);
 	glfwSetMouseButtonCallback(*window, mouse_button_callback);
@@ -159,7 +158,7 @@ int start(GLFWwindow *window, t_object *obj)
 {
 	init_options();
 	glEnable(GL_DEPTH_TEST);
-	glClearColor(0.9686f, 0.9765f, 0.9765f, 1.0f);
+	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 	if (!init_object(obj))
 		return (0);
 	if (!renderLoop(window, obj))
