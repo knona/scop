@@ -1,7 +1,46 @@
 #include "scop.h"
 
-t_vec3 pos;
-float  scaling;
+t_vec3   pos;
+int      scop_pause;
+double   time;
+int      line_mode;
+int      l_click;
+t_cursor curs_pos;
+t_vec3   pos_cpy;
+
+void scroll_callback(GLFWwindow *window, double xoffset, double yoffset)
+{
+	const float speed = 0.2;
+
+	if (yoffset > 0)
+		pos.z += speed;
+	if (yoffset < 0)
+		pos.z -= speed;
+}
+
+void cursor_position_callback(GLFWwindow *window, double xpos, double ypos)
+{
+	(void)window;
+	if (l_click)
+	{
+		pos.x = pos_cpy.x - (curs_pos.x - xpos) / 100;
+		pos.y = pos_cpy.y + (curs_pos.y - ypos) / 100;
+	}
+}
+
+void mouse_button_callback(GLFWwindow *window, int button, int action, int mods)
+{
+	(void)mods;
+	if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
+	{
+		l_click = 1;
+		glfwGetCursorPos(window, &curs_pos.x, &curs_pos.y);
+		pos_cpy.x = pos.x;
+		pos_cpy.y = pos.y;
+	}
+	if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE)
+		l_click = 0;
+}
 
 void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods)
 {
@@ -25,6 +64,13 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
 			pos.z += speed * (1 << (int)(action == GLFW_REPEAT));
 		if (key == GLFW_KEY_O)
 			pos.z -= speed * (1 << (int)(action == GLFW_REPEAT));
+		if (key == GLFW_KEY_ENTER)
+			scop_pause = !scop_pause;
+		if (key == GLFW_KEY_F)
+		{
+			line_mode = !line_mode;
+			glPolygonMode(GL_FRONT_AND_BACK, line_mode ? GL_LINE : GL_FILL);
+		}
 	}
 }
 
@@ -42,7 +88,6 @@ int init_window(GLFWwindow **window)
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	// glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	*window = glfwCreateWindow(SCOP_WIN_WIDTH, SCOP_WIN_HEIGHT, "LearnOpenGL", NULL, NULL);
 	if (!*window)
 		return (error_0("Failed to create GLFW window"));
@@ -50,8 +95,12 @@ int init_window(GLFWwindow **window)
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 		return (error_0("Failed to initialize GLAD"));
 	glViewport(0, 0, SCOP_WIN_WIDTH, SCOP_WIN_HEIGHT);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	// glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 	glfwSetKeyCallback(*window, (void (*)(GLFWwindow *, int, int, int, int))key_callback);
+	glfwSetMouseButtonCallback(*window, mouse_button_callback);
+	glfwSetCursorPosCallback(*window, cursor_position_callback);
+	glfwSetScrollCallback(*window, scroll_callback);
 	return (1);
 }
 
@@ -70,10 +119,8 @@ int renderLoop(GLFWwindow *window, t_object *obj)
 		processInput(window);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glBindVertexArray(obj->vao);
-
 		model = translate(&g_matI4, pos);
-		model = rotate(&model, glfwGetTime() * M_PI_2, get_vec3(0, 1, 0));
-		model = scale(&model, get_vec3(scaling, scaling, scaling));
+		model = rotate(&model, time * M_PI_2, get_vec3(0, 1, 0));
 		if (!uniform_set_mat4x4(obj->program, "model", &model))
 			return (0);
 
@@ -81,6 +128,8 @@ int renderLoop(GLFWwindow *window, t_object *obj)
 		glBindVertexArray(0);
 		glfwSwapBuffers(window);
 		glfwPollEvents();
+		if (!scop_pause)
+			time += 0.01;
 	}
 	return (1);
 }
@@ -88,7 +137,10 @@ int renderLoop(GLFWwindow *window, t_object *obj)
 int start(GLFWwindow *window, t_object *obj)
 {
 	ft_bzero(&pos, 3 * sizeof(float));
-	scaling = 1;
+	scop_pause = 0;
+	time = 0;
+	line_mode = 1;
+	l_click = 0;
 	glEnable(GL_DEPTH_TEST);
 	glClearColor(0.9686f, 0.9765f, 0.9765f, 1.0f);
 	if (!init_object(obj))

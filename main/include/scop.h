@@ -38,6 +38,13 @@ struct s_object
 };
 typedef struct s_object t_object;
 
+struct s_cursor
+{
+	double x;
+	double y;
+};
+typedef struct s_cursor t_cursor;
+
 /*
 ** ERROR
 */

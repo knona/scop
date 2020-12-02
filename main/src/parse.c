@@ -7,9 +7,6 @@ int add_vertex(t_object *obj, const float *vec)
 	if (obj->vertices_max_size < obj->vertices_size + 1)
 	{
 		nb_buffers = ((obj->vertices_size + 1) / SCOP_VERTICES_BUFFER) + 1;
-		ft_printf("vert nb buffers:%d, realloc size:%d\n",
-				  nb_buffers,
-				  (int)(3 * sizeof(float) * SCOP_VERTICES_BUFFER * nb_buffers));
 		if (!(obj->vertices = (float *)realloc(
 				  obj->vertices, 3 * sizeof(float) * SCOP_VERTICES_BUFFER * nb_buffers)))
 			return (error_0("Malloc error"));
@@ -27,9 +24,6 @@ int add_indices(t_object *obj, const uint *indices)
 	if (obj->indices_max_size < obj->indices_size + 1)
 	{
 		nb_buffers = (obj->indices_size + 1) / SCOP_INDICES_BUFFER + 1;
-		ft_printf("indices nb buffers:%d, realloc size:%d\n",
-				  nb_buffers,
-				  (int)(3 * sizeof(float) * SCOP_VERTICES_BUFFER * nb_buffers));
 		if (!(obj->indices = (uint *)realloc(
 				  obj->indices, 3 * sizeof(uint) * SCOP_INDICES_BUFFER * nb_buffers)))
 			return (error_0("Malloc error"));
@@ -64,11 +58,11 @@ int process_line(t_object *obj, char *line)
 	else if (line[i] == 'f' && line[i + 1] == ' ')
 	{
 		i += 2;
-		indices[0] = strtoul(line + i, &end, 10);
+		indices[0] = strtoul(line + i, &end, 10) - 1;
 		i = end - line;
-		indices[1] = strtoul(line + i, &end, 10);
+		indices[1] = strtoul(line + i, &end, 10) - 1;
 		i = end - line;
-		indices[2] = strtoul(line + i, &end, 10);
+		indices[2] = strtoul(line + i, &end, 10) - 1;
 		if (!add_indices(obj, indices))
 			return (0);
 	}
