@@ -34,46 +34,71 @@ int add_indices(t_object *obj, const uint *indices)
 	return (1);
 }
 
+int process_vertex(t_object *obj, const char *line)
+{
+	int   i;
+	int   j;
+	float vertex[3];
+	char *end;
+
+	i = 0;
+	j = 0;
+	while (j < 3)
+	{
+		vertex[j] = strtof(line + i, &end);
+		i = end - line;
+		j++;
+	}
+	if (!add_vertex(obj, vertex))
+		return (0);
+	return (1);
+}
+
+int process_indices(t_object *obj, const char *line)
+{
+	int   i;
+	int   j;
+	uint  indices[4];
+	char *end;
+
+	i = 0;
+	j = 0;
+	while (j < 3)
+	{
+		indices[j++] = strtoul(line + i, &end, 10) - 1;
+		i = end - line;
+		while (line[i] && line[i] != ' ')
+			i++;
+	}
+	if (!add_indices(obj, indices))
+		return (0);
+	while (line[i] == ' ')
+		i++;
+	if (line[i] != '\0')
+	{
+		indices[1] = strtoul(line + i, &end, 10) - 1;
+		if (!add_indices(obj, indices))
+			return (0);
+	}
+	return (1);
+}
+
 int process_line(t_object *obj, char *line)
 {
-	int    i;
-	uint   indices[4];
-	t_vec3 vec;
-	char * end;
+	int i;
 
 	i = 0;
 	while (line[i] == ' ')
 		i++;
 	if (line[i] == 'v' && line[i + 1] == ' ')
 	{
-		i += 2;
-		vec.x = strtof(line + i, &end);
-		i = end - line;
-		vec.y = strtof(line + i, &end);
-		i = end - line;
-		vec.z = strtof(line + i, &end);
-		if (!add_vertex(obj, (float *)&vec))
+		if (!process_vertex(obj, line + i + 2))
 			return (0);
 	}
 	else if (line[i] == 'f' && line[i + 1] == ' ')
 	{
-		i += 2;
-		indices[0] = strtoul(line + i, &end, 10) - 1;
-		i = end - line;
-		indices[1] = strtoul(line + i, &end, 10) - 1;
-		i = end - line;
-		indices[2] = strtoul(line + i, &end, 10) - 1;
-		i = end - line;
-		if (!add_indices(obj, indices))
+		if (!process_indices(obj, line + 2))
 			return (0);
-		while (line[i] == ' ')
-			i++;
-		if (line[i] != '\0')
-		{
-			indices[1] = strtoul(line + i, &end, 10) - 1;
-			if (!add_indices(obj, indices))
-				return (0);
-		}
 	}
 	return (1);
 }
