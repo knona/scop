@@ -6,7 +6,7 @@
 #    By: krambono <krambono@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/09 13:02:16 by krambono          #+#    #+#              #
-#    Updated: 2020/11/25 19:45:08 by krambono         ###   ########lyon.fr    #
+#    Updated: 2020/12/02 10:31:25 by krambono         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,7 +65,7 @@ $(NAME).so: $(OBJS_ALL_DIRS) $(FT_DIR)/libft.so $(OBJS) $(HEADERS)
 	@printf "\033[2K\r$(NAME).so has been created $(GREEN)[OK]$(DEFAULT)\n"
 
 $(OBJS_MAIN_DIR)%.o: $(SRCS_MAIN_DIR)%.c $(HEADERS)
-	@printf "\033[2K\r$(BLUE)>>Compiling $(DEFAULT)$<"
+	@printf "\033[2K\r$(BLUE)>>Compiling $(DEFAULT)$< "
 	@$(CC) -c $(CFLAGS) -I $(FT_DIR)/include -I $(HEADERS_DIR) $< -o $@
 
 $(FT_DIR)/libft.so:

@@ -6,7 +6,7 @@
 #    By: krambono <krambono@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/24 11:51:46 by krambono          #+#    #+#              #
-#    Updated: 2020/11/27 11:22:49 by krambono         ###   ########lyon.fr    #
+#    Updated: 2020/12/02 10:30:39 by krambono         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,7 @@ $(OBJS_MAIN_DIR):
 	@mkdir -p $@
 
 $(NAME): $(GLFW_DIR) $(GLAD_DIR) $(GLAD_DIR)/src/glad.o $(OBJS_MAIN_DIR) $(OBJS)
-	@printf "\033[2K\r$(BLUE)>>Linking...$(DEFAULT)"
+	@printf "\033[2K\r$(BLUE)>>Linking...$(DEFAULT) "
 	@$(CC)	-o $@ $(OBJS)\
 			$(GLAD_DIR)/src/glad.o\
 			-L$(GLFW_DIR)/lib -lglfw\
@@ -68,7 +68,7 @@ $(NAME): $(GLFW_DIR) $(GLAD_DIR) $(GLAD_DIR)/src/glad.o $(OBJS_MAIN_DIR) $(OBJS)
 	@printf "\033[2K\r$(NAME) has been created $(GREEN)[OK]$(DEFAULT)\n"
 
 $(OBJS_MAIN_DIR)%.o: $(SRCS_MAIN_DIR)%.c $(MGL_DIR)/libmgl.so $(HEADERS)
-	@printf "\033[2K\r$(BLUE)>>Compiling $(DEFAULT)$<"
+	@printf "\033[2K\r$(BLUE)>>Compiling $(DEFAULT)$< "
 	@$(CC) $(CFLAGS)\
 		-I $(GLFW_DIR)/include\
 		-I $(GLAD_DIR)/include\
@@ -78,7 +78,7 @@ $(OBJS_MAIN_DIR)%.o: $(SRCS_MAIN_DIR)%.c $(MGL_DIR)/libmgl.so $(HEADERS)
 		-o $@ -c $<
 
 $(GLAD_DIR)/src/glad.o: $(GLAD_DIR)/src/glad.c
-	@printf "\033[2K\r$(BLUE)>>Compiling $(DEFAULT)$<"
+	@printf "\033[2K\r$(BLUE)>>Compiling $(DEFAULT)$< "
 	@clang -I $(GLAD_DIR)/include -o $@ -c $<
 
 $(GLFW_DIR):
