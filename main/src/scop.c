@@ -92,14 +92,17 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
 			rotx += speed * (1 << (int)(action == GLFW_REPEAT));
 		if (key == GLFW_KEY_L)
 			rotx -= speed * (1 << (int)(action == GLFW_REPEAT));
-		if (key == GLFW_KEY_SPACE)
-			scop_pause = !scop_pause;
-		if (key == GLFW_KEY_R)
-			init_options();
-		if (key == GLFW_KEY_F)
+		if (action != GLFW_REPEAT)
 		{
-			line_mode = !line_mode;
-			glPolygonMode(GL_FRONT_AND_BACK, line_mode ? GL_LINE : GL_FILL);
+			if (key == GLFW_KEY_SPACE)
+				scop_pause = !scop_pause;
+			if (key == GLFW_KEY_R)
+				init_options();
+			if (key == GLFW_KEY_F)
+			{
+				line_mode = !line_mode;
+				glPolygonMode(GL_FRONT_AND_BACK, line_mode ? GL_LINE : GL_FILL);
+			}
 		}
 	}
 }
@@ -127,7 +130,7 @@ int init_window(GLFWwindow **window)
 	glViewport(0, 0, SCOP_WIN_WIDTH, SCOP_WIN_HEIGHT);
 	glfwSetWindowSizeLimits(*window, 400, 225, GLFW_DONT_CARE, GLFW_DONT_CARE);
 	glfwSetFramebufferSizeCallback(*window, framebuffer_size_callback);
-	glfwSetKeyCallback(*window, (void (*)(GLFWwindow *, int, int, int, int))key_callback);
+	glfwSetKeyCallback(*window, key_callback);
 	glfwSetMouseButtonCallback(*window, mouse_button_callback);
 	glfwSetCursorPosCallback(*window, cursor_position_callback);
 	glfwSetScrollCallback(*window, scroll_callback);
