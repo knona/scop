@@ -110,7 +110,6 @@ int parse_obj_file(const char *path, t_object *obj);
 /*
 ** TEXTURE
 */
-int get_bmp_image(const char *path, t_image_infos *infos);
 int get_texture(const char *path, GLuint *texture);
 
 #endif // !SCOP_H
