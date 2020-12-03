@@ -21,6 +21,11 @@
 #define SCOP_WIN_WIDTH 1280
 #define SCOP_WIN_HEIGHT 720
 
+#define BMP_DATA_OFFSET 0x0A
+#define BMP_WIDTH 0x12
+#define BMP_HEIGHT 0x16
+#define BMP_SIZE 0x22
+
 typedef unsigned int uint;
 
 struct s_range
@@ -57,6 +62,16 @@ struct s_cursor
 };
 typedef struct s_cursor t_cursor;
 
+struct s_image_infos
+{
+	uint           width;
+	uint           height;
+	uint           size;
+	uint           data_offset;
+	unsigned char *data;
+};
+typedef struct s_image_infos t_image_infos;
+
 /*
 ** ERROR
 */
@@ -91,5 +106,11 @@ void clean_object(t_object *obj);
 ** PARSE
 */
 int parse_obj_file(const char *path, t_object *obj);
+
+/*
+** TEXTURE
+*/
+int get_bmp_image(const char *path, t_image_infos *infos);
+int get_texture(const char *path, GLuint *texture);
 
 #endif // !SCOP_H
