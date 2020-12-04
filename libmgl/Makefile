@@ -6,7 +6,7 @@
 #    By: krambono <krambono@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/09 13:02:16 by krambono          #+#    #+#              #
-#    Updated: 2020/12/02 10:31:25 by krambono         ###   ########lyon.fr    #
+#    Updated: 2020/12/04 11:27:54 by krambono         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,13 +14,12 @@
 NAME =	libmgl
 
 # SOURCES
-SRCS_FILES_WILDCARD	= $(wildcard src/*.c)
-SRCS_FILES			= $(SRCS_FILES_WILDCARD:src/%=%)
+SRCS_FILES		= angle.c dot_product_mm.c dot_product_mv.c get_vectors.c globals.c mat_at.c mat_set.c norme.c print.c projection.c rotation.c transformation.c transpose.c
 SRCS_MAIN_DIR 	= src/
 SRCS 			= $(addprefix $(SRCS_MAIN_DIR), $(SRCS_FILES))
 
 # HEADERS
-HEADERS_FILES 	= mgl.h
+HEADERS_FILES 	= mgl.h structs.h
 HEADERS_DIR 	= ./include/
 HEADERS 		= $(addprefix $(HEADERS_DIR), $(HEADERS_FILES))
 

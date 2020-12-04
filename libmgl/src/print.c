@@ -1,10 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: krambono <krambono@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/12/04 11:10:45 by krambono          #+#    #+#             */
+/*   Updated: 2020/12/04 11:15:17 by krambono         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "mgl.h"
 
-void print_vec(void *vec, int vec_size)
+void	print_vec(void *vec, int vec_size)
 {
-	int   i;
-	char *properties = "xyzw";
+	int		i;
+	char	*properties;
 
+	properties = "xyzw";
 	i = 0;
 	while (i < vec_size)
 	{
@@ -16,7 +29,7 @@ void print_vec(void *vec, int vec_size)
 	printf("\n");
 }
 
-void print_mat(void *mat, int mat_size)
+void	print_mat(void *mat, int mat_size)
 {
 	int i;
 	int j;

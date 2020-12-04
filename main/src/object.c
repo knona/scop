@@ -18,10 +18,10 @@ int set_uniform_matrices(t_object *obj)
 	t_mat4x4 projection;
 
 	glUseProgram(obj->program);
-	view = g_matI4;
+	view = g_mati4;
 	projection = perspective(
 		deg_to_rad(30), (float)SCOP_WIN_WIDTH / (float)SCOP_WIN_HEIGHT, 0.1f, 100.0f);
-	view = translate(&g_matI4, get_vec3(0, 0, -3));
+	view = translate(&g_mati4, get_vec3(0, 0, -3));
 	if (!uniform_set_mat4x4(obj->program, "projection", &projection))
 		return (0);
 	if (!uniform_set_mat4x4(obj->program, "view", &view))

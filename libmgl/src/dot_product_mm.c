@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   dot_product_mm.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: krambono <krambono@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/12/04 11:06:25 by krambono          #+#    #+#             */
+/*   Updated: 2020/12/04 11:08:21 by krambono         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "mgl.h"
 
-void dotmm(const void *mat1, const void *mat2, void *out, int size)
+void		dotmm(const void *mat1, const void *mat2, void *out, int size)
 {
-	int   i;
-	int   j;
-	int   k;
-	float v1;
-	float v2;
+	int		i;
+	int		j;
+	int		k;
+	float	v1;
+	float	v2;
 
 	i = 0;
 	while (i < size)
@@ -28,7 +40,7 @@ void dotmm(const void *mat1, const void *mat2, void *out, int size)
 	}
 }
 
-t_mat2x2 dotmm2x2(const t_mat2x2 *mat1, const t_mat2x2 *mat2)
+t_mat2x2	dotmm2x2(const t_mat2x2 *mat1, const t_mat2x2 *mat2)
 {
 	t_mat2x2 out;
 
@@ -37,7 +49,7 @@ t_mat2x2 dotmm2x2(const t_mat2x2 *mat1, const t_mat2x2 *mat2)
 	return (out);
 }
 
-t_mat3x3 dotmm3x3(const t_mat3x3 *mat1, const t_mat3x3 *mat2)
+t_mat3x3	dotmm3x3(const t_mat3x3 *mat1, const t_mat3x3 *mat2)
 {
 	t_mat3x3 out;
 
@@ -46,7 +58,7 @@ t_mat3x3 dotmm3x3(const t_mat3x3 *mat1, const t_mat3x3 *mat2)
 	return (out);
 }
 
-t_mat4x4 dotmm4x4(const t_mat4x4 *mat1, const t_mat4x4 *mat2)
+t_mat4x4	dotmm4x4(const t_mat4x4 *mat1, const t_mat4x4 *mat2)
 {
 	t_mat4x4 out;
 

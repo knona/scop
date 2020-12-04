@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   transpose.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: krambono <krambono@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/12/04 11:12:54 by krambono          #+#    #+#             */
+/*   Updated: 2020/12/04 11:13:27 by krambono         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "mgl.h"
 
-void transpose(const void *mat, void *out, int size)
+void		transpose(const void *mat, void *out, int size)
 {
 	int i;
 	int j;
@@ -18,7 +30,7 @@ void transpose(const void *mat, void *out, int size)
 	}
 }
 
-t_mat2x2 transpose2x2(const t_mat2x2 *mat)
+t_mat2x2	transpose2x2(const t_mat2x2 *mat)
 {
 	t_mat2x2 out;
 
@@ -26,7 +38,7 @@ t_mat2x2 transpose2x2(const t_mat2x2 *mat)
 	return (out);
 }
 
-t_mat3x3 transpose3x3(const t_mat3x3 *mat)
+t_mat3x3	transpose3x3(const t_mat3x3 *mat)
 {
 	t_mat3x3 out;
 
@@ -34,7 +46,7 @@ t_mat3x3 transpose3x3(const t_mat3x3 *mat)
 	return (out);
 }
 
-t_mat4x4 transpose4x4(const t_mat4x4 *mat)
+t_mat4x4	transpose4x4(const t_mat4x4 *mat)
 {
 	t_mat4x4 out;
 

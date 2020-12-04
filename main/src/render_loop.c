@@ -39,7 +39,7 @@ int renderLoop(GLFWwindow *window, t_object *obj)
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glBindVertexArray(obj->vao);
-		model = translate(&g_matI4, g_event_options.pos);
+		model = translate(&g_mati4, g_event_options.pos);
 		model = scale(&model, get_vec3(scaling, scaling, scaling));
 		model = rotate_y(&model, g_event_options.time * M_2_PI);
 		model = rotate_x(&model, g_event_options.rotx);

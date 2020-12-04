@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   dot_product_mv.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: krambono <krambono@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/12/04 11:07:36 by krambono          #+#    #+#             */
+/*   Updated: 2020/12/04 11:08:44 by krambono         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "mgl.h"
 
-void dotmv(const void *mat, const void *vec, void *out, int size)
+void	dotmv(const void *mat, const void *vec, void *out, int size)
 {
-	int   i;
-	int   j;
-	float v1;
-	float v2;
+	int		i;
+	int		j;
+	float	v1;
+	float	v2;
 
 	i = 0;
 	while (i < size)
@@ -22,7 +34,7 @@ void dotmv(const void *mat, const void *vec, void *out, int size)
 	}
 }
 
-t_vec2 dotmv2x2(const t_mat2x2 *mat, const t_vec2 *vec)
+t_vec2	dotmv2x2(const t_mat2x2 *mat, const t_vec2 *vec)
 {
 	t_vec2 out;
 
@@ -31,7 +43,7 @@ t_vec2 dotmv2x2(const t_mat2x2 *mat, const t_vec2 *vec)
 	return (out);
 }
 
-t_vec3 dotmv3x3(const t_mat3x3 *mat, const t_vec3 *vec)
+t_vec3	dotmv3x3(const t_mat3x3 *mat, const t_vec3 *vec)
 {
 	t_vec3 out;
 
@@ -40,7 +52,7 @@ t_vec3 dotmv3x3(const t_mat3x3 *mat, const t_vec3 *vec)
 	return (out);
 }
 
-t_vec4 dotmv4x4(const t_mat4x4 *mat, const t_vec4 *vec)
+t_vec4	dotmv4x4(const t_mat4x4 *mat, const t_vec4 *vec)
 {
 	t_vec4 out;
 
