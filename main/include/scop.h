@@ -73,6 +73,22 @@ struct s_image_infos
 };
 typedef struct s_image_infos t_image_infos;
 
+struct s_event_options
+{
+	t_vec3    pos;
+	int       scop_pause;
+	double    time;
+	int       line_mode;
+	int       l_click;
+	t_cursor  curs_pos;
+	t_vec3    pos_cpy;
+	float     rotx;
+	t_object *obj;
+};
+typedef struct s_event_options t_event_options;
+
+extern t_event_options g_event_options;
+
 /*
 ** ERROR
 */
@@ -112,5 +128,27 @@ int parse_obj_file(const char *path, t_object *obj);
 ** TEXTURE
 */
 int get_texture(const char *path, t_object *obj);
+
+/*
+** EVENTS
+*/
+void framebuffer_size_callback(GLFWwindow *window, int width, int height);
+void scroll_callback(GLFWwindow *window, double xoffset, double yoffset);
+void cursor_position_callback(GLFWwindow *window, double xpos, double ypos);
+void mouse_button_callback(GLFWwindow *window, int button, int action, int mods);
+void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods);
+
+/*
+** Utils
+*/
+void init_options(t_object *obj);
+int  clean(t_object *obj);
+int  init_window(GLFWwindow **window);
+void display_commands();
+
+/*
+** RENDER LOOP
+*/
+int renderLoop(GLFWwindow *window, t_object *obj);
 
 #endif // !SCOP_H
