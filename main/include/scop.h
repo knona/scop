@@ -45,6 +45,7 @@ struct s_object
 	GLuint  ebo;
 	GLuint  vbo;
 	GLuint  program;
+	GLuint  texture;
 	float * vertices;
 	uint *  indices;
 	int     vertices_size;
@@ -110,6 +111,6 @@ int parse_obj_file(const char *path, t_object *obj);
 /*
 ** TEXTURE
 */
-int get_texture(const char *path, GLuint *texture);
+int get_texture(const char *path, t_object *obj);
 
 #endif // !SCOP_H

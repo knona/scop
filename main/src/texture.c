@@ -44,15 +44,16 @@ int get_bmp_image(const char *path, t_image_infos *infos)
 	return (1);
 }
 
-int get_texture(const char *path, GLuint *texture)
+int get_texture(const char *path, t_object *obj)
 {
 	t_image_infos infos;
 
 	if (!get_bmp_image(path, &infos))
 		return (0);
-
-	glGenTextures(1, texture);
-	glBindTexture(GL_TEXTURE_2D, *texture);
+	glGenTextures(1, &obj->texture);
+	glBindTexture(GL_TEXTURE_2D, obj->texture);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexImage2D(GL_TEXTURE_2D,
 				 0,
 				 GL_RGB,
@@ -62,8 +63,8 @@ int get_texture(const char *path, GLuint *texture)
 				 GL_BGR,
 				 GL_UNSIGNED_BYTE,
 				 infos.data);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glGenerateMipmap(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, 0);
 	free(infos.data);
 	return (1);
 }

@@ -38,6 +38,8 @@ int init_object(t_object *obj)
 		return (0);
 	if (!set_uniform_matrices(obj))
 		return (0);
+	if (!get_texture("test.bmp", obj))
+		return (0);
 	create_vao(obj);
 	return (1);
 }

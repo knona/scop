@@ -178,7 +178,7 @@ int renderLoop(GLFWwindow *window, t_object *obj)
 		model = translate(&model, get_vec3(-x, -y, -z));
 		if (!uniform_set_mat4x4(obj->program, "model", &model))
 			return (0);
-
+		glBindTexture(GL_TEXTURE_2D, obj->texture);
 		glDrawElements(GL_TRIANGLES, obj->indices_size, GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
 		glfwSwapBuffers(window);
