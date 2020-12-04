@@ -6,7 +6,7 @@
 /*   By: krambono <krambono@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 11:38:39 by krambono          #+#    #+#             */
-/*   Updated: 2020/12/04 11:42:03 by krambono         ###   ########lyon.fr   */
+/*   Updated: 2020/12/04 11:46:22 by krambono         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int		create_shader(GLuint *shader, const GLenum shader_type,
 	shader_code = get_shader_code(shader_path, &length);
 	if (!shader_code)
 		return (0);
-	glShaderSource(*shader, 1, &shader_code, &length);
+	glShaderSource(*shader, 1, (const char **)&shader_code, &length);
 	glCompileShader(*shader);
 	free((void *)shader_code);
 	return (check_compilation_success(*shader, shader_path));
