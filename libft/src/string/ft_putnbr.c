@@ -6,13 +6,13 @@
 /*   By: krambono <krambono@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/27 18:48:34 by krambono          #+#    #+#             */
-/*   Updated: 2020/11/27 19:12:03 by krambono         ###   ########lyon.fr   */
+/*   Updated: 2020/12/04 11:33:47 by krambono         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void ft_putnbr(int nb)
+void	ft_putnbr(int nb)
 {
 	ft_putnbr_fd(nb, 1);
 }
