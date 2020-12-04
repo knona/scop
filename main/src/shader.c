@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   shader.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: krambono <krambono@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/12/04 11:38:39 by krambono          #+#    #+#             */
+/*   Updated: 2020/12/04 11:42:03 by krambono         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "scop.h"
 
-char *get_shader_code(const char *shader_path, int *out_length)
+char	*get_shader_code(const char *shader_path, int *out_length)
 {
-	int   fd;
-	int   ret;
-	char *shader_code;
-	char *buffer[SCOP_SHADER_BUFFER];
+	int		fd;
+	int		ret;
+	char	*shader_code;
+	char	*buffer[SCOP_SHADER_BUFFER];
 
 	shader_code = NULL;
 	fd = open(shader_path, O_RDONLY);
@@ -26,29 +38,32 @@ char *get_shader_code(const char *shader_path, int *out_length)
 	return (shader_code);
 }
 
-int check_compilation_success(GLuint shader, const char *shader_path)
+int		check_compilation_success(GLuint shader, const char *shader_path)
 {
-	int  success;
-	char buffer[SCOP_GL_ERROR_BUFFER];
+	int		success;
+	char	buffer[SCOP_GL_ERROR_BUFFER];
 
 	ft_bzero(buffer, SCOP_GL_ERROR_BUFFER);
 	glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
 	if (!success)
 	{
 		glGetShaderInfoLog(shader, SCOP_GL_ERROR_BUFFER, NULL, buffer);
-		return (error_0("Failed to compile shader \"%s\":\ns%s", shader_path, buffer));
+		return (error_0("Failed to compile shader \"%s\":\ns%s",
+		shader_path, buffer));
 	}
 	return (1);
 }
 
-int create_shader(GLuint *shader, const GLenum shader_type, const char *shader_path)
+int		create_shader(GLuint *shader, const GLenum shader_type,
+		const char *shader_path)
 {
-	int length;
+	int		length;
+	char	*shader_code;
 
 	*shader = glCreateShader(shader_type);
 	if (!*shader)
 		return (error_0("Failed to create shader %s", shader_path));
-	const char *shader_code = get_shader_code(shader_path, &length);
+	shader_code = get_shader_code(shader_path, &length);
 	if (!shader_code)
 		return (0);
 	glShaderSource(*shader, 1, &shader_code, &length);
