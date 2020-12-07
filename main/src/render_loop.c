@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render_loop.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: krambono <krambono@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/12/07 15:24:38 by krambono          #+#    #+#             */
+/*   Updated: 2020/12/07 15:27:17 by krambono         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "scop.h"
 
-float get_scaling(t_object *obj)
+float	get_scaling(t_object *obj)
 {
 	float max;
 	float abs_value;
@@ -15,7 +27,7 @@ float get_scaling(t_object *obj)
 	return (max != 0 ? 2 / max : 1);
 }
 
-t_vec3 get_vec_center(t_object *obj)
+t_vec3	get_vec_center(t_object *obj)
 {
 	float x;
 	float y;
@@ -27,12 +39,32 @@ t_vec3 get_vec_center(t_object *obj)
 	return (get_vec3(-x, -y, -z));
 }
 
-int renderLoop(GLFWwindow *window, t_object *obj)
+void	change_mix_value(t_object *obj)
 {
-	t_mat4x4 model;
-	float    scaling;
-	t_vec3   vec_center;
-	float    mix_value;
+	static float mix_value = 0;
+
+	uniform_set_1f(obj->program, "mix_value", mix_value);
+	if (!g_event_options.scop_pause)
+			g_event_options.time += 0.01;
+	if (g_event_options.increase)
+	{
+		mix_value += 0.01;
+		if (mix_value > 1)
+			mix_value = 1;
+	}
+	else
+	{
+		mix_value -= 0.01;
+		if (mix_value < 0)
+			mix_value = 0;
+	}
+}
+
+int		renderLoop(GLFWwindow *window, t_object *obj)
+{
+	t_mat4x4	model;
+	float		scaling;
+	t_vec3		vec_center;
 
 	vec_center = get_vec_center(obj);
 	scaling = get_scaling(obj);
@@ -47,26 +79,12 @@ int renderLoop(GLFWwindow *window, t_object *obj)
 		model = translate(&model, vec_center);
 		if (!uniform_set_mat4x4(obj->program, "model", &model))
 			return (0);
-		uniform_set_1f(obj->program, "mix_value", mix_value);
+		change_mix_value(obj);
 		glBindTexture(GL_TEXTURE_2D, obj->texture);
 		glDrawArrays(GL_TRIANGLES, 0, obj->nb_elements);
 		glBindVertexArray(0);
 		glfwSwapBuffers(window);
 		glfwPollEvents();
-		if (!g_event_options.scop_pause)
-			g_event_options.time += 0.01;
-		if (g_event_options.increase)
-		{
-			mix_value += 0.01;
-			if (mix_value > 1)
-				mix_value = 1;
-		}
-		else
-		{
-			mix_value -= 0.01;
-			if (mix_value < 0)
-				mix_value = 0;
-		}
 	}
 	return (1);
 }

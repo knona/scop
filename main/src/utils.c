@@ -47,3 +47,32 @@ void display_commands()
 	ft_printf("Pause the rotation: \033[36mspace\033[0m \n");
 	ft_printf("Fill polygons: \033[36mf\033[0m \n");
 }
+
+void	get_max_range(t_object *obj, t_vec3 *vertex)
+{
+	static int first = 1;
+
+	if (first)
+	{
+		obj->range.x_max = vertex->x;
+		obj->range.x_min = vertex->x;
+		obj->range.y_max = vertex->y;
+		obj->range.y_min = vertex->y;
+		obj->range.z_max = vertex->z;
+		obj->range.z_min = vertex->z;
+		first = 0;
+		return ;
+	}
+	if (vertex->x > obj->range.x_max)
+		obj->range.x_max = vertex->x;
+	if (vertex->x < obj->range.x_min)
+		obj->range.x_min = vertex->x;
+	if (vertex->y > obj->range.y_max)
+		obj->range.y_max = vertex->y;
+	if (vertex->y < obj->range.y_min)
+		obj->range.y_min = vertex->y;
+	if (vertex->z > obj->range.z_max)
+		obj->range.z_max = vertex->z;
+	if (vertex->z < obj->range.z_min)
+		obj->range.z_min = vertex->z;
+}

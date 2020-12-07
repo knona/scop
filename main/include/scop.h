@@ -120,7 +120,9 @@ void clean_object(t_object *obj);
 /*
 ** PARSE
 */
-int parse_obj_file(const char *path, t_object *obj);
+int		add_vertex(t_object *obj, const t_vec3 *vec);
+int		add_vbo_element(t_object *obj, const int *indices, t_vec2 coord);
+int		parse_obj_file(const char *path, t_object *obj);
 
 /*
 ** TEXTURE
@@ -143,6 +145,7 @@ void init_options(t_object *obj);
 int  clean(t_object *obj);
 int  init_window(GLFWwindow **window);
 void display_commands();
+void	get_max_range(t_object *obj, t_vec3 *vertex);
 
 /*
 ** RENDER LOOP
