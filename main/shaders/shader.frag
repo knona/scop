@@ -1,8 +1,10 @@
-#version 330 core
-
+#version 400 core
 flat in int vertex_index;
+in vec2     tex_coord;
 
 out vec4 out_frag;
+
+uniform sampler2D texture1;
 
 void main()
 {
@@ -27,4 +29,5 @@ void main()
 		break;
 	}
 	out_frag = color;
+	// out_frag = texture(texture1, tex_coord);
 }

@@ -47,7 +47,7 @@ int renderLoop(GLFWwindow *window, t_object *obj)
 		if (!uniform_set_mat4x4(obj->program, "model", &model))
 			return (0);
 		glBindTexture(GL_TEXTURE_2D, obj->texture);
-		glDrawElements(GL_TRIANGLES, obj->indices_size, GL_UNSIGNED_INT, 0);
+		glDrawArrays(GL_TRIANGLES, 0, obj->nb_elements);
 		glBindVertexArray(0);
 		glfwSwapBuffers(window);
 		glfwPollEvents();

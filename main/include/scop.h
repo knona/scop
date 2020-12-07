@@ -16,8 +16,7 @@
 
 #define SCOP_SHADER_BUFFER 200
 #define SCOP_GL_ERROR_BUFFER 500
-#define SCOP_VERTICES_BUFFER 1000
-#define SCOP_INDICES_BUFFER 1000
+#define SCOP_ELEMENTS_BUFFER 1000
 #define SCOP_WIN_WIDTH 1280
 #define SCOP_WIN_HEIGHT 720
 
@@ -42,16 +41,12 @@ typedef struct s_range t_range;
 struct s_object
 {
 	GLuint  vao;
-	GLuint  ebo;
 	GLuint  vbo;
 	GLuint  program;
 	GLuint  texture;
-	float * vertices;
-	uint *  indices;
-	int     vertices_size;
-	int     indices_size;
-	int     vertices_max_size;
-	int     indices_max_size;
+	float * vbo_data;
+	t_vec3 *vertices;
+	int     nb_elements;
 	t_range range;
 };
 typedef struct s_object t_object;
