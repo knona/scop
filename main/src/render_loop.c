@@ -6,7 +6,7 @@
 /*   By: krambono <krambono@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 15:24:38 by krambono          #+#    #+#             */
-/*   Updated: 2020/12/07 15:27:17 by krambono         ###   ########lyon.fr   */
+/*   Updated: 2020/12/07 15:33:30 by krambono         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,18 @@
 
 float	get_scaling(t_object *obj)
 {
-	float max;
-	float abs_value;
+	int		i;
+	float	max;
+	float	abs_value;
 
 	max = 1;
-	for (int i = 0; i < 6; i++)
+	i = 0;
+	while (i < 6)
 	{
 		abs_value = fabsf(((float *)(&obj->range))[i]);
 		if (abs_value > max)
 			max = abs_value;
+		i++;
 	}
 	return (max != 0 ? 2 / max : 1);
 }
@@ -45,7 +48,7 @@ void	change_mix_value(t_object *obj)
 
 	uniform_set_1f(obj->program, "mix_value", mix_value);
 	if (!g_event_options.scop_pause)
-			g_event_options.time += 0.01;
+		g_event_options.time += 0.01;
 	if (g_event_options.increase)
 	{
 		mix_value += 0.01;
@@ -60,7 +63,7 @@ void	change_mix_value(t_object *obj)
 	}
 }
 
-int		renderLoop(GLFWwindow *window, t_object *obj)
+int		render_loop(GLFWwindow *window, t_object *obj)
 {
 	t_mat4x4	model;
 	float		scaling;

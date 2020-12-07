@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   scop.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: krambono <krambono@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/12/07 15:33:52 by krambono          #+#    #+#             */
+/*   Updated: 2020/12/07 15:34:19 by krambono         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "scop.h"
 
-int start(GLFWwindow *window, t_object *obj)
+int	start(GLFWwindow *window, t_object *obj)
 {
 	glEnable(GL_DEPTH_TEST);
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
@@ -8,16 +20,16 @@ int start(GLFWwindow *window, t_object *obj)
 		return (0);
 	init_options(obj);
 	display_commands();
-	if (!renderLoop(window, obj))
+	if (!render_loop(window, obj))
 		return (0);
 	return (1);
 }
 
-int main(int argc, const char **argv)
+int	main(int argc, const char **argv)
 {
-	GLFWwindow *window;
-	int         ret;
-	t_object    obj;
+	GLFWwindow	*window;
+	int			ret;
+	t_object	obj;
 
 	if (argc != 2)
 		return (error_int(1, "Path to .obj file is required"));

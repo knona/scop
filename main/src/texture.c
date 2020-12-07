@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   texture.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: krambono <krambono@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/12/07 15:35:34 by krambono          #+#    #+#             */
+/*   Updated: 2020/12/07 15:35:35 by krambono         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "scop.h"
 
-int bmp_reader(const char *path, int fd, t_image_infos *infos)
+int	bmp_reader(const char *path, int fd, t_image_infos *infos)
 {
-	unsigned char header[54];
-	long          ret;
+	unsigned char	header[54];
+	long			ret;
 
 	ret = read(fd, header, 54);
 	if (ret == -1)
@@ -25,7 +37,7 @@ int bmp_reader(const char *path, int fd, t_image_infos *infos)
 	return (1);
 }
 
-int get_bmp_image(const char *path, t_image_infos *infos)
+int	get_bmp_image(const char *path, t_image_infos *infos)
 {
 	int fd;
 
@@ -44,7 +56,7 @@ int get_bmp_image(const char *path, t_image_infos *infos)
 	return (1);
 }
 
-int get_texture(const char *path, t_object *obj)
+int	get_texture(const char *path, t_object *obj)
 {
 	t_image_infos infos;
 
@@ -56,15 +68,8 @@ int get_texture(const char *path, t_object *obj)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexImage2D(GL_TEXTURE_2D,
-				 0,
-				 GL_RGB,
-				 infos.width,
-				 infos.height,
-				 0,
-				 GL_BGR,
-				 GL_UNSIGNED_BYTE,
-				 infos.data);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, infos.width, infos.height, 0, GL_BGR,
+	GL_UNSIGNED_BYTE, infos.data);
 	glGenerateMipmap(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, 0);
 	free(infos.data);

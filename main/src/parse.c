@@ -6,7 +6,7 @@
 /*   By: krambono <krambono@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 15:13:32 by krambono          #+#    #+#             */
-/*   Updated: 2020/12/07 15:30:47 by krambono         ###   ########lyon.fr   */
+/*   Updated: 2020/12/07 15:39:23 by krambono         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int		process_face(t_object *obj, const char *line)
 	if (!add_vbo_element(obj, indices, get_vec2(1, 1)))
 		return (0);
 	if (!add_4th_vertex(obj, indices, line, i))
-		return(0);
+		return (0);
 	return (1);
 }
 
