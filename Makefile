@@ -6,7 +6,7 @@
 #    By: krambono <krambono@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/24 11:51:46 by krambono          #+#    #+#              #
-#    Updated: 2020/12/07 17:28:42 by krambono         ###   ########lyon.fr    #
+#    Updated: 2020/12/07 17:34:48 by krambono         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,7 @@
 NAME = scop
 
 # SOURCES
-SRCS_FILES_WILDCARD	= $(wildcard main/src/*.c)
-SRCS_FILES			= $(SRCS_FILES_WILDCARD:main/src/%=%)
+SRCS_FILES			= error.c events_2.c events.c globals.c object.c parse_2.c parse.c program.c program_uniform.c render_loop.c scop.c shader.c texture.c utils.c
 SRCS_MAIN_DIR		= main/src/
 SRCS				= $(addprefix $(SRCS_MAIN_DIR), $(SRCS_FILES))
 
@@ -25,8 +24,7 @@ OBJS_MAIN_DIR 	= main/obj/
 OBJS 			= $(addprefix $(OBJS_MAIN_DIR), $(OBJS_FILES))
 
 # HEADERS
-HEADERS_FILES_WILDCARD	= $(wildcard main/include/*.h)
-HEADERS_FILES 			= $(HEADERS_FILES_WILDCARD:main/include/%=%)
+HEADERS_FILES 			= scop.h structs.h
 HEADERS_MAIN_DIR		= main/include/
 HEADERS					= $(addprefix $(HEADERS_MAIN_DIR), $(HEADERS_FILES))
 
