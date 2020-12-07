@@ -6,7 +6,7 @@
 /*   By: krambono <krambono@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 15:12:58 by krambono          #+#    #+#             */
-/*   Updated: 2020/12/07 15:13:15 by krambono         ###   ########lyon.fr   */
+/*   Updated: 2020/12/07 17:55:43 by krambono         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int		init_object(t_object *obj)
 		return (0);
 	if (!set_uniform_matrices(obj))
 		return (0);
-	if (!get_texture("unicorn.bmp", obj))
+	if (!get_texture("resources/unicorn.bmp", obj))
 		return (0);
 	create_vao(obj);
 	return (1);
