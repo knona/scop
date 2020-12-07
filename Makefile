@@ -6,7 +6,7 @@
 #    By: krambono <krambono@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/24 11:51:46 by krambono          #+#    #+#              #
-#    Updated: 2020/12/07 17:34:48 by krambono         ###   ########lyon.fr    #
+#    Updated: 2020/12/07 17:46:02 by krambono         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,7 @@ $(NAME): $(GLFW_DIR) $(GLAD_DIR) $(GLAD_DIR)/src/glad.o $(OBJS_MAIN_DIR) $(OBJS)
 			-L$(GLFW_DIR)/lib -lglfw\
 			-L$(FT_DIR) -lft\
 			-L$(MGL_DIR) -lmgl\
-			-lGL -lX11 -lpthread -lXrandr -lXi -ldl -lm
+			-lX11 -lpthread -lXrandr -lXi -ldl -lm
 	@printf "\033[2K\r$(NAME) has been created $(GREEN)[OK]$(DEFAULT)\n"
 
 $(OBJS_MAIN_DIR)%.o: $(SRCS_MAIN_DIR)%.c $(FT_DIR)/libft.so $(MGL_DIR)/libmgl.so $(HEADERS)

@@ -1,4 +1,4 @@
-#version 400 core
+#version 330 core
 flat in int vertex_index;
 in vec2     tex_coord;
 
