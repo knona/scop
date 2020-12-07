@@ -6,7 +6,7 @@
 /*   By: krambono <krambono@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 15:35:50 by krambono          #+#    #+#             */
-/*   Updated: 2020/12/07 17:56:27 by krambono         ###   ########lyon.fr   */
+/*   Updated: 2020/12/07 18:45:36 by krambono         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	display_commands(void)
 	ft_printf("Pause the rotation: \033[36mSPACE\033[0m \n");
 	ft_printf("Fill polygons: \033[36mF\033[0m \n");
 	ft_printf("Add texture: \033[36mT\033[0m \n");
+	ft_printf("Reset options: \033[36mR\033[0m \n");
 }
 
 void	get_max_range(t_object *obj, t_vec3 *vertex)
