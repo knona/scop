@@ -6,7 +6,7 @@
 #    By: krambono <krambono@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/09 13:02:16 by krambono          #+#    #+#              #
-#    Updated: 2020/12/04 11:27:54 by krambono         ###   ########lyon.fr    #
+#    Updated: 2020/12/07 18:32:45 by krambono         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ GREEN = \033[32m
 BLUE = \033[36m
 DEFAULT = \033[0m
 
-.PHONY: all directories clean clean_exe fclean re
+.PHONY: all directories clean clean_exe fclean re force
 
 # REGLES
 all: $(NAME).a $(NAME).so
@@ -54,20 +54,20 @@ all: $(NAME).a $(NAME).so
 $(OBJS_ALL_DIRS):
 	@mkdir -p $@
 
-$(NAME).a: $(OBJS_ALL_DIRS) $(FT_DIR)/libft.so $(OBJS) $(HEADERS)
+$(NAME).a: $(OBJS_ALL_DIRS) $(OBJS) $(HEADERS)
 	@ar rc $(NAME).a $(OBJS)
 	@ranlib $(NAME).a
 	@printf "\033[2K\r$(NAME).a has been created  $(GREEN)[OK]$(DEFAULT)\n"
 
-$(NAME).so: $(OBJS_ALL_DIRS) $(FT_DIR)/libft.so $(OBJS) $(HEADERS)
+$(NAME).so: $(OBJS_ALL_DIRS) $(OBJS) $(HEADERS)
 	@$(CC) -shared $(OBJS) -o $(NAME).so -L$(FT_DIR) -lft
 	@printf "\033[2K\r$(NAME).so has been created $(GREEN)[OK]$(DEFAULT)\n"
 
-$(OBJS_MAIN_DIR)%.o: $(SRCS_MAIN_DIR)%.c $(HEADERS)
+$(OBJS_MAIN_DIR)%.o: $(SRCS_MAIN_DIR)%.c $(FT_DIR)/libft.so $(HEADERS)
 	@printf "\033[2K\r$(BLUE)>>Compiling $(DEFAULT)$< "
 	@$(CC) -c $(CFLAGS) -I $(FT_DIR)/include -I $(HEADERS_DIR) $< -o $@
 
-$(FT_DIR)/libft.so:
+$(FT_DIR)/libft.so: $(shell cd $(FT_DIR) && make -q || echo force)
 	@make -sC $(FT_DIR)
 
 clean:

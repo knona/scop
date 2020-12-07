@@ -6,7 +6,7 @@
 #    By: krambono <krambono@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/24 11:51:46 by krambono          #+#    #+#              #
-#    Updated: 2020/12/07 17:46:02 by krambono         ###   ########lyon.fr    #
+#    Updated: 2020/12/07 18:31:40 by krambono         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,10 +87,10 @@ $(GLAD_DIR):
 	@echo "$(BLUE)Installing glad...$(DEFAULT)"
 	@./scripts/install-glad.bash
 
-$(FT_DIR)/libft.so: $(shell make -C $(FT_DIR) -q || echo force)
+$(FT_DIR)/libft.so: $(shell cd $(FT_DIR) && make -q || echo force)
 	@make -sC $(FT_DIR)
 
-$(MGL_DIR)/libmgl.so: $(FT_DIR)/libft.so $(shell make -C $(MGL_DIR) -q || echo force)
+$(MGL_DIR)/libmgl.so: $(shell cd $(MGL_DIR) && make -q || echo force)
 	@make -sC $(MGL_DIR)
 
 clean:
