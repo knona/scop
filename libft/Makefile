@@ -6,7 +6,7 @@
 #    By: krambono <krambono@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/09 13:02:16 by krambono          #+#    #+#              #
-#    Updated: 2020/12/02 10:31:07 by krambono         ###   ########lyon.fr    #
+#    Updated: 2020/12/07 17:31:31 by krambono         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ SRCS_DIRS 		= $(FT_PRINTF_DIR) $(GNL_DIR) $(MEM_DIR) $(STRING_DIR) $(OTHER_DIR)
 SRCS 			= $(addprefix $(SRCS_MAIN_DIR), $(SRCS_FILES))
 
 # HEADERS
-HEADERS_FILES 	= libft.h ft_printf.h
+HEADERS_FILES 	= libft.h ft_printf.h get_next_line.h ft_limits.h
 HEADERS_DIR 	= ./include/
 HEADERS 		= $(addprefix $(HEADERS_DIR), $(HEADERS_FILES))
 
