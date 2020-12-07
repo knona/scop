@@ -88,6 +88,8 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
 		{
 			if (key == GLFW_KEY_SPACE)
 				g_event_options.scop_pause = !g_event_options.scop_pause;
+			if (key == GLFW_KEY_T)
+				g_event_options.increase = !g_event_options.increase;
 			if (key == GLFW_KEY_R)
 				init_options(g_event_options.obj);
 			if (key == GLFW_KEY_F)

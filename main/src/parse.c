@@ -3,27 +3,26 @@
 int add_vertex(t_object *obj, const t_vec3 *vec)
 {
 	static int vertices_max_size = 0;
-	static int vertices_size = 0;
 	int        nb_buffers;
 
-	if (vertices_size + 1 > vertices_max_size)
+	if (obj->vertices_size + 1 > vertices_max_size)
 	{
-		nb_buffers = (vertices_size + 1) / SCOP_ELEMENTS_BUFFER + 1;
+		nb_buffers = (obj->vertices_size + 1) / SCOP_ELEMENTS_BUFFER + 1;
 		if (!(obj->vertices = (t_vec3 *)realloc(
 				  obj->vertices, sizeof(t_vec3) * SCOP_ELEMENTS_BUFFER * nb_buffers)))
 			return (error_0("Malloc error"));
 		vertices_max_size = nb_buffers * SCOP_ELEMENTS_BUFFER;
 	}
-	ft_memcpy(obj->vertices + vertices_size, vec, sizeof(t_vec3));
-	vertices_size++;
+	ft_memcpy(obj->vertices + obj->vertices_size, vec, sizeof(t_vec3));
+	obj->vertices_size++;
 	return (1);
 }
 
-int add_vbo_element(t_object *obj, const uint *indices, t_vec2 *coord)
+int add_vbo_element(t_object *obj, const int *indices, t_vec2 coord)
 {
 	static int   vbo_max_size = 0;
 	static int   vbo_size = 0;
-	const t_vec2 coords[3] = { { 0, 1 }, { coord->x, coord->y }, { 1, 0 } };
+	const t_vec2 coords[3] = { { 0, 1 }, { coord.x, coord.y }, { 1, 0 } };
 	int          nb_buffers;
 	int          i;
 
@@ -101,33 +100,33 @@ int process_vertex(t_object *obj, const char *line)
 
 int process_face(t_object *obj, const char *line)
 {
-	int    i;
-	int    j;
-	uint   indices[4];
-	t_vec2 coord;
-	char * end;
+	int   i;
+	int   j;
+	int   indices[4];
+	char *end;
 
 	i = 0;
 	j = 0;
 	while (j < 3)
 	{
-		indices[j++] = strtoul(line + i, &end, 10) - 1;
+		indices[j] = strtoul(line + i, &end, 10) - 1;
+		if (indices[j] >= obj->vertices_size)
+			return (1);
 		i = end - line;
 		while (line[i] && line[i] != ' ')
 			i++;
+		j++;
 	}
-	coord.x = 1;
-	coord.y = 1;
-	if (!add_vbo_element(obj, indices, &coord))
+	if (!add_vbo_element(obj, indices, get_vec2(1, 1)))
 		return (0);
 	while (line[i] == ' ')
 		i++;
 	if (line[i] != '\0')
 	{
 		indices[1] = strtoul(line + i, &end, 10) - 1;
-		coord.x = 0;
-		coord.y = 0;
-		if (!add_vbo_element(obj, indices, &coord))
+		if (indices[j] >= obj->vertices_size)
+			return (1);
+		if (!add_vbo_element(obj, indices, get_vec2(0, 0)))
 			return (0);
 	}
 	return (1);

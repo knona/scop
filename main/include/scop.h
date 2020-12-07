@@ -46,6 +46,7 @@ struct s_object
 	GLuint  texture;
 	float * vbo_data;
 	t_vec3 *vertices;
+	int     vertices_size;
 	int     nb_elements;
 	t_range range;
 };
@@ -79,6 +80,7 @@ struct s_event_options
 	t_vec3    pos_cpy;
 	float     rotx;
 	t_object *obj;
+	int       increase;
 };
 typedef struct s_event_options t_event_options;
 
@@ -106,6 +108,7 @@ int create_program(GLuint *program, const char *vertex_shader_path, const char *
 */
 int uniform_set_mat4x4(GLuint program, const char *uniformName, const t_mat4x4 *mat);
 int uniform_set_vec4(GLuint program, const char *uniformName, const t_vec4 *vec);
+int uniform_set_1f(GLuint program, const char *uniform_name, float value);
 int uniform_set_1i(GLuint program, const char *uniformName, int value);
 
 /*

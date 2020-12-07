@@ -32,6 +32,7 @@ int renderLoop(GLFWwindow *window, t_object *obj)
 	t_mat4x4 model;
 	float    scaling;
 	t_vec3   vec_center;
+	float    mix_value;
 
 	vec_center = get_vec_center(obj);
 	scaling = get_scaling(obj);
@@ -46,6 +47,7 @@ int renderLoop(GLFWwindow *window, t_object *obj)
 		model = translate(&model, vec_center);
 		if (!uniform_set_mat4x4(obj->program, "model", &model))
 			return (0);
+		uniform_set_1f(obj->program, "mix_value", mix_value);
 		glBindTexture(GL_TEXTURE_2D, obj->texture);
 		glDrawArrays(GL_TRIANGLES, 0, obj->nb_elements);
 		glBindVertexArray(0);
@@ -53,6 +55,18 @@ int renderLoop(GLFWwindow *window, t_object *obj)
 		glfwPollEvents();
 		if (!g_event_options.scop_pause)
 			g_event_options.time += 0.01;
+		if (g_event_options.increase)
+		{
+			mix_value += 0.01;
+			if (mix_value > 1)
+				mix_value = 1;
+		}
+		else
+		{
+			mix_value -= 0.01;
+			if (mix_value < 0)
+				mix_value = 0;
+		}
 	}
 	return (1);
 }

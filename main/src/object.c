@@ -6,9 +6,10 @@ void create_vao(t_object *obj)
 	glBindBuffer(GL_ARRAY_BUFFER, obj->vbo);
 	glBufferData(GL_ARRAY_BUFFER, obj->nb_elements * 5 * sizeof(float), obj->vbo_data, GL_STATIC_DRAW);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void *)0);
+	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(
 		1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void *)(3 * sizeof(float)));
-	glEnableVertexAttribArray(0);
+	glEnableVertexAttribArray(1);
 	glBindVertexArray(0);
 }
 
@@ -37,7 +38,7 @@ int init_object(t_object *obj)
 		return (0);
 	if (!set_uniform_matrices(obj))
 		return (0);
-	if (!get_texture("test.bmp", obj))
+	if (!get_texture("unicorn.bmp", obj))
 		return (0);
 	create_vao(obj);
 	return (1);
@@ -55,5 +56,7 @@ void clean_object(t_object *obj)
 		glDeleteVertexArrays(1, &obj->vao);
 	if (obj->vbo)
 		glDeleteBuffers(1, &obj->vbo);
+	if (obj->texture)
+		glDeleteTextures(1, &obj->texture);
 	ft_bzero(obj, sizeof(t_object));
 }

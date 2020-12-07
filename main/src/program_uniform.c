@@ -52,3 +52,13 @@ int	uniform_set_1i(GLuint program, const char *uniform_name, int value)
 	glUniform1i(location, value);
 	return (1);
 }
+
+int	uniform_set_1f(GLuint program, const char *uniform_name, float value)
+{
+	GLint location;
+
+	if (!get_uniform_location(program, uniform_name, &location))
+		return (0);
+	glUniform1f(location, value);
+	return (1);
+}

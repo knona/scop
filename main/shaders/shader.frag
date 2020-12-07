@@ -5,6 +5,7 @@ in vec2     tex_coord;
 out vec4 out_frag;
 
 uniform sampler2D texture1;
+uniform float     mix_value;
 
 void main()
 {
@@ -28,6 +29,5 @@ void main()
 		color = vec4(0.25882f, 0.25882f, 0.25882f, 1.0f);
 		break;
 	}
-	out_frag = color;
-	// out_frag = texture(texture1, tex_coord);
+	out_frag = mix(color, texture(texture1, tex_coord), mix_value);
 }
