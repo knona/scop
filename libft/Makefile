@@ -6,7 +6,7 @@
 #    By: krambono <krambono@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/09 13:02:16 by krambono          #+#    #+#              #
-#    Updated: 2020/12/07 17:31:31 by krambono         ###   ########lyon.fr    #
+#    Updated: 2020/12/09 09:36:53 by krambono         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,7 +73,7 @@ DEFAULT = \033[0m
 .PHONY: all directories clean clean_exe fclean re
 
 # REGLES
-all: $(NAME).a $(NAME).so
+all: $(NAME).a
 
 $(OBJS_ALL_DIRS):
 	@mkdir -p $@

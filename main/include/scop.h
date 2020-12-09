@@ -6,7 +6,7 @@
 /*   By: krambono <krambono@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 15:47:57 by krambono          #+#    #+#             */
-/*   Updated: 2020/12/07 15:51:08 by krambono         ###   ########lyon.fr   */
+/*   Updated: 2020/12/09 09:42:04 by krambono         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void					key_callback(GLFWwindow *window,
 ** Utils
 */
 void					init_options(t_object *obj);
-int						clean(t_object *obj);
+int						clean_scop(t_object *obj);
 int						init_window(GLFWwindow **window);
 void					display_commands();
 void					get_max_range(t_object *obj, t_vec3 *vertex);

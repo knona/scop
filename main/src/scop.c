@@ -6,7 +6,7 @@
 /*   By: krambono <krambono@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 15:33:52 by krambono          #+#    #+#             */
-/*   Updated: 2020/12/07 15:34:19 by krambono         ###   ########lyon.fr   */
+/*   Updated: 2020/12/09 09:42:32 by krambono         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,6 @@ int	main(int argc, const char **argv)
 	if (!init_window(&window))
 		return (1);
 	ret = !start(window, &obj);
-	clean(&obj);
+	clean_scop(&obj);
 	return (ret);
 }

@@ -6,7 +6,7 @@
 /*   By: krambono <krambono@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 15:35:50 by krambono          #+#    #+#             */
-/*   Updated: 2020/12/07 18:45:36 by krambono         ###   ########lyon.fr   */
+/*   Updated: 2020/12/09 09:41:29 by krambono         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		init_window(GLFWwindow **window)
 	return (1);
 }
 
-int		clean(t_object *obj)
+int		clean_scop(t_object *obj)
 {
 	clean_object(obj);
 	glfwTerminate();

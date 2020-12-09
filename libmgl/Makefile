@@ -6,7 +6,7 @@
 #    By: krambono <krambono@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/09 13:02:16 by krambono          #+#    #+#              #
-#    Updated: 2020/12/07 18:32:45 by krambono         ###   ########lyon.fr    #
+#    Updated: 2020/12/09 09:40:08 by krambono         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ DEFAULT = \033[0m
 .PHONY: all directories clean clean_exe fclean re force
 
 # REGLES
-all: $(NAME).a $(NAME).so
+all: $(NAME).a
 
 $(OBJS_ALL_DIRS):
 	@mkdir -p $@
@@ -63,12 +63,9 @@ $(NAME).so: $(OBJS_ALL_DIRS) $(OBJS) $(HEADERS)
 	@$(CC) -shared $(OBJS) -o $(NAME).so -L$(FT_DIR) -lft
 	@printf "\033[2K\r$(NAME).so has been created $(GREEN)[OK]$(DEFAULT)\n"
 
-$(OBJS_MAIN_DIR)%.o: $(SRCS_MAIN_DIR)%.c $(FT_DIR)/libft.so $(HEADERS)
+$(OBJS_MAIN_DIR)%.o: $(SRCS_MAIN_DIR)%.c $(HEADERS)
 	@printf "\033[2K\r$(BLUE)>>Compiling $(DEFAULT)$< "
 	@$(CC) -c $(CFLAGS) -I $(FT_DIR)/include -I $(HEADERS_DIR) $< -o $@
-
-$(FT_DIR)/libft.so: $(shell cd $(FT_DIR) && make -q || echo force)
-	@make -sC $(FT_DIR)
 
 clean:
 	@rm -rf $(OBJS_MAIN_DIR)
