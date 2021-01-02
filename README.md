@@ -35,9 +35,9 @@ Les commandes de contrôle sont affichées sur la sortie standard.
 ## Screenshots
 
 **Teapot :**
-![alt text](screenshots/teapot_1.png)
-![alt text](screenshots/teapot_2.png)
+![teapot_1](screenshots/teapot_1.png)
+![teapot_2](screenshots/teapot_2.png)
 
 **Spider :**
 
-![alt text](screenshots/spider.png)
+![spider](screenshots/spider.png)
