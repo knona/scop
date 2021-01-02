@@ -32,7 +32,7 @@ make
 
 Les commandes de contrôle sont affichées sur la sortie standard.
 
-## Capture d'écrans
+## Captures d'écran
 
 **Théière :**
 ![teapot_1](screenshots/teapot_1.png)
