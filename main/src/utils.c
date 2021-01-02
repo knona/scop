@@ -58,8 +58,8 @@ void	display_commands(void)
 	"\033[36mSCROLL\033[0m\n");
 	ft_printf("Rotation (x axis): \033[36mK / L\033[0m \n");
 	ft_printf("Pause the rotation: \033[36mSPACE\033[0m \n");
-	ft_printf("Fill polygons: \033[36mF\033[0m \n");
-	ft_printf("Add texture: \033[36mT\033[0m \n");
+	ft_printf("Turn wireframe mode: \033[36mF\033[0m \n");
+	ft_printf("Use unicorn texture: \033[36mT\033[0m \n");
 	ft_printf("Reset options: \033[36mR\033[0m \n");
 }
 
