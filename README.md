@@ -32,12 +32,12 @@ make
 
 Les commandes de contrôle sont affichées sur la sortie standard.
 
-## Screenshots
+## Capture d'écrans
 
-**Teapot :**
+**Théière :**
 ![teapot_1](screenshots/teapot_1.png)
 ![teapot_2](screenshots/teapot_2.png)
 
-**Spider :**
+**Araignée :**
 
 ![spider](screenshots/spider.png)
