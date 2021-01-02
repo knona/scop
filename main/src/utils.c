@@ -25,7 +25,7 @@ int		init_window(GLFWwindow **window)
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	*window = glfwCreateWindow(SCOP_WIN_WIDTH, SCOP_WIN_HEIGHT, "LearnOpenGL",
+	*window = glfwCreateWindow(SCOP_WIN_WIDTH, SCOP_WIN_HEIGHT, "SCOP",
 				NULL, NULL);
 	if (!*window)
 		return (error_0("Failed to create GLFW window"));
@@ -61,6 +61,7 @@ void	display_commands(void)
 	ft_printf("Turn wireframe mode: \033[36mF\033[0m \n");
 	ft_printf("Use unicorn texture: \033[36mT\033[0m \n");
 	ft_printf("Reset options: \033[36mR\033[0m \n");
+	ft_printf("Exit: \033[36mESC\033[0m \n");
 }
 
 void	get_max_range(t_object *obj, t_vec3 *vertex)
