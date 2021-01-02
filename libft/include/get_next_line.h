@@ -36,8 +36,8 @@ typedef struct s_list_infos	t_list_infos;
 /*
 ** LIST
 */
-void						clear_list(t_list **list);
-t_list						*create_node(void);
-void						add_node(t_list **list, t_list *new);
+void						gnl_clear_list(t_list **list);
+t_list						*gnl_create_node(void);
+void						gnl_add_node(t_list **list, t_list *new);
 
 #endif

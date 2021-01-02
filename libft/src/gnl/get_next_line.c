@@ -36,21 +36,21 @@
 ** }
 */
 
-int		clean(t_list *el, t_list **list, int choice)
+static int		clean(t_list *el, t_list **list, int choice)
 {
 	if (choice == 1)
 		free(el);
-	clear_list(list);
+	gnl_clear_list(list);
 	return (0);
 }
 
-int		read_file(const int fd, t_list_infos *infos)
+static int		read_file(const int fd, t_list_infos *infos)
 {
 	t_list	*node_reader;
 	int		ret;
 	int		index_lf;
 
-	if (!(node_reader = create_node()))
+	if (!(node_reader = gnl_create_node()))
 		return (clean(NULL, &(infos->list), 0));
 	while ((ret = read(fd, node_reader->buf, GNL_BUFF_SIZE)))
 	{
@@ -61,8 +61,8 @@ int		read_file(const int fd, t_list_infos *infos)
 		node_reader->index_lf = index_lf;
 		node_reader->len = index_lf == -1 ? ret : index_lf;
 		infos->line_size += node_reader->len;
-		add_node(&(infos->list), node_reader);
-		if (!(node_reader = create_node()))
+		gnl_add_node(&(infos->list), node_reader);
+		if (!(node_reader = gnl_create_node()))
 			return (clean(NULL, &(infos->list), 0));
 		if (index_lf != -1)
 			break ;
@@ -71,7 +71,7 @@ int		read_file(const int fd, t_list_infos *infos)
 	return (1);
 }
 
-void	get_line2(t_list_infos *infos, t_list *list)
+static void		get_line2(t_list_infos *infos, t_list *list)
 {
 	size_t	new_len;
 
@@ -94,7 +94,7 @@ void	get_line2(t_list_infos *infos, t_list *list)
 	}
 }
 
-void	get_line(char **line, t_list_infos *infos)
+static void		get_line(char **line, t_list_infos *infos)
 {
 	t_list	*tmp;
 	t_list	*list;
@@ -121,13 +121,13 @@ void	get_line(char **line, t_list_infos *infos)
 	get_line2(infos, list);
 }
 
-int		get_next_line(const int fd, char **line, const int behavior)
+int				get_next_line(const int fd, char **line, const int behavior)
 {
 	static t_list_infos infos = {NULL, 0};
 
 	if (behavior == GNL_FREE)
 	{
-		clear_list(&(infos.list));
+		gnl_clear_list(&(infos.list));
 		return (1);
 	}
 	if (fd < 0 || !line)

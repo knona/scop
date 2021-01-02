@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-void	clear_list(t_list **list)
+void	gnl_clear_list(t_list **list)
 {
 	t_list *tmp;
 
@@ -24,7 +24,7 @@ void	clear_list(t_list **list)
 	}
 }
 
-t_list	*create_node(void)
+t_list	*gnl_create_node(void)
 {
 	t_list *list;
 
@@ -36,7 +36,7 @@ t_list	*create_node(void)
 	return (list);
 }
 
-void	add_node(t_list **list, t_list *new)
+void	gnl_add_node(t_list **list, t_list *new)
 {
 	t_list *tmp;
 
