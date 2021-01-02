@@ -31,7 +31,6 @@ OBJS_FILES 		= $(SRCS_FILES:.c=.o)
 OBJS 			= $(addprefix $(OBJS_MAIN_DIR), $(OBJS_FILES))
 
 # LIBRARIES
-FT_DIR = ../libft
 
 # COMPILATEUR
 CC 				= clang
@@ -49,7 +48,7 @@ DEFAULT = \033[0m
 .PHONY: all directories clean clean_exe fclean re force
 
 # REGLES
-all: $(NAME).a $(NAME).so
+all: $(NAME).a
 
 $(OBJS_ALL_DIRS):
 	@mkdir -p $@
@@ -60,15 +59,12 @@ $(NAME).a: $(OBJS_ALL_DIRS) $(OBJS) $(HEADERS)
 	@printf "\033[2K\r$(NAME).a has been created  $(GREEN)[OK]$(DEFAULT)\n"
 
 $(NAME).so: $(OBJS_ALL_DIRS) $(OBJS) $(HEADERS)
-	@$(CC) -shared $(OBJS) -o $(NAME).so -L$(FT_DIR) -lft
+	@$(CC) -shared $(OBJS) -o $(NAME).so
 	@printf "\033[2K\r$(NAME).so has been created $(GREEN)[OK]$(DEFAULT)\n"
 
-$(OBJS_MAIN_DIR)%.o: $(SRCS_MAIN_DIR)%.c $(FT_DIR)/libft.so $(HEADERS)
+$(OBJS_MAIN_DIR)%.o: $(SRCS_MAIN_DIR)%.c $(HEADERS)
 	@printf "\033[2K\r$(BLUE)>>Compiling $(DEFAULT)$< "
-	@$(CC) -c $(CFLAGS) -I $(FT_DIR)/include -I $(HEADERS_DIR) $< -o $@
-
-$(FT_DIR)/libft.so: $(shell cd $(FT_DIR) && make -q || echo force)
-	@make -sC $(FT_DIR)
+	@$(CC) -c $(CFLAGS) -I $(HEADERS_DIR) $< -o $@
 
 clean:
 	@rm -rf $(OBJS_MAIN_DIR)

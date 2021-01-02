@@ -73,7 +73,7 @@ DEFAULT = \033[0m
 .PHONY: all directories clean clean_exe fclean re
 
 # REGLES
-all: $(NAME).a $(NAME).so
+all: $(NAME).a
 
 $(OBJS_ALL_DIRS):
 	@mkdir -p $@

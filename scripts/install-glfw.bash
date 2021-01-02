@@ -36,7 +36,7 @@ cd glfw-3.3.2
 
 mkdir build
 cd build
-cmake -DCMAKE_INSTALL_PREFIX=$glad_dir -DGLFW_BUILD_DOCS=no -DGLFW_BUILD_EXAMPLES=no -DGLFW_BUILD_TESTS=no -DBUILD_SHARED_LIBS=yes ..
+cmake -DCMAKE_INSTALL_PREFIX=$glad_dir -DGLFW_BUILD_DOCS=no -DGLFW_BUILD_EXAMPLES=no -DGLFW_BUILD_TESTS=no ..
 make install
 
 cd ../../..
